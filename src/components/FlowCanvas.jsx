@@ -11,7 +11,14 @@ import {
     useReactFlow,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-
+import { RectangleNode, CircleNode, DiamondNode, Oval, Parallelogram } from "./customNodes/customNodes";
+const nodeTypes = {
+    rectangle: RectangleNode,
+    circle: CircleNode,
+    diamond: DiamondNode,
+    oval: Oval,
+    parallelogram: Parallelogram,
+};
 function FlowCanvas() {
     const initialNodes = [];
     const initialEdges = [];
@@ -53,7 +60,7 @@ function FlowCanvas() {
         <div
             className="w-full h-full"
             onDrop={onDrop}
-            onDragOver={(e) => e.preventDefault()} // ✅ allow drop
+            onDragOver={(e) => e.preventDefault()}
         >
             <ReactFlow
                 nodes={nodes}
@@ -62,6 +69,7 @@ function FlowCanvas() {
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
                 fitView
+                nodeTypes={nodeTypes}
             >
                 <Background />
                 <Controls />
