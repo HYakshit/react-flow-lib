@@ -9,6 +9,7 @@ import {
   useNodesState,
   useEdgesState,
   useReactFlow,
+  Panel,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import {
@@ -18,6 +19,8 @@ import {
   Oval,
   Parallelogram,
 } from "./customNodes/customNodes";
+import { Navbar } from "./common/Navbar";
+import JsonViewer from "./JsonViewer";
 const nodeTypes = {
   rectangle: RectangleNode,
   circle: CircleNode,
@@ -31,9 +34,12 @@ function FlowCanvas() {
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [isStart, setIsStart] = useState(true);
+  const [show, setShow] = useState(false);
   const reactFlowInstance = useReactFlow();
 
+  function handleSetShow(val) {
+    setShow(val);
+  }
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -103,6 +109,19 @@ function FlowCanvas() {
         fitView
         nodeTypes={nodeTypes}
       >
+        <Panel position="top-center">
+          {" "}
+          <Navbar></Navbar>{" "}
+        </Panel>
+        <Panel position="bottom-right">
+          {" "}
+          <JsonViewer
+            nodes={nodes}
+            edges={edges}
+            show={show}
+            handleSetShow={handleSetShow}
+          ></JsonViewer>{" "}
+        </Panel>
         <Background />
         <Controls />
       </ReactFlow>

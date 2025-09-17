@@ -1,13 +1,20 @@
-import FlowCanvas from "./components/FlowCanvas";
-import Sidebar from "./components/Sidebar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./components/Home";
 
 export default function App() {
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="flex-1">
-        <FlowCanvas />
-      </div>
-    </div>
+
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/404" element={<Page404 />} />
+            <Route path="/contactus" element={<ContactUS />} />
+            <Route path="/about" element={<AboutUs />} /> */}
+
+            {/* Add more routes as needed */}
+          </Routes>
+     
+      </BrowserRouter>
+  
   );
 }
