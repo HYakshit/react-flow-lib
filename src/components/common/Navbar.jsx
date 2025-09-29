@@ -8,13 +8,6 @@ export const Navbar = () => {
           Flowchart Editor
         </Link>
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/json-view">Json View</Link>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };

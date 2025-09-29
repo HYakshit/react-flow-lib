@@ -11,22 +11,42 @@ import {
   useReactFlow,
   Panel,
 } from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
 import {
-  RectangleNode,
-  CircleNode,
-  DiamondNode,
-  Oval,
-  Parallelogram,
-} from "./customNodes/customNodes";
+  Zap, // Trigger
+  Play, // Action
+  Bell, // Notification
+  GitBranch, // Conditional
+  Clock, // Delay
+  RefreshCw, // Loop
+  Workflow, // Sub-process
+  SplitSquareHorizontal, // Parallel
+  GitFork, // Decision
+} from "lucide-react";
+import "@xyflow/react/dist/style.css";
+import { iconNode } from "./customNodes/customNodes";
 import { Navbar } from "./common/Navbar";
 import JsonViewer from "./JsonViewer";
 const nodeTypes = {
-  rectangle: RectangleNode,
-  circle: CircleNode,
-  diamond: DiamondNode,
-  oval: Oval,
-  parallelogram: Parallelogram,
+  Trigger: iconNode,
+  Action: iconNode,
+  Notification: iconNode,
+  Conditional: iconNode,
+  Delay: iconNode,
+  Loop: iconNode,
+  subprocess: iconNode,
+  parallel: iconNode,
+  Descision: iconNode,
+};
+const nodeIcons = {
+  Trigger: <Zap size={20} />,
+  Action: <Play size={20} />,
+  Notification: <Bell size={20} />,
+  Conditional: <GitBranch size={20} />,
+  Delay: <Clock size={20} />,
+  Loop: <RefreshCw size={20} />,
+  subprocess: <Workflow size={20} />,
+  parallel: <SplitSquareHorizontal size={20} />,
+  Descision: <GitFork size={20} />,
 };
 function FlowCanvas() {
   const initialNodes = [];
@@ -44,18 +64,6 @@ function FlowCanvas() {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
-  function onovalChange(id, newValue) {
-    setNodes((nds) =>
-      nds.map((node) =>
-        node.id === id
-          ? {
-              ...node,
-              data: { ...node.data, value: newValue }, // update node data
-            }
-          : node
-      )
-    );
-  }
 
   const onDrop = useCallback(
     (event) => {
@@ -72,22 +80,8 @@ function FlowCanvas() {
         id: id,
         type: type,
         position,
-        data: { label: `${type} Node` },
+        data: { label: `${type} Node`, icon: nodeIcons[type] },
       };
-
-      if (type === "oval") {
-        const id = `${+new Date()}`;
-        newNode = {
-          id: id,
-          type,
-          position,
-          data: {
-            label: `${type} Node`,
-            value: "start", // default
-            onovalChange: (val) => onovalChange(id, val),
-          },
-        };
-      }
 
       setNodes((nds) => nds.concat(newNode));
     },
@@ -96,11 +90,12 @@ function FlowCanvas() {
 
   return (
     <div
-      className="w-full h-full"
+      className="w-full h-full bg-gray-100"
       onDrop={onDrop}
       onDragOver={(e) => e.preventDefault()}
     >
       <ReactFlow
+       className="bg-black"
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -122,7 +117,6 @@ function FlowCanvas() {
             handleSetShow={handleSetShow}
           ></JsonViewer>{" "}
         </Panel>
-        <Background />
         <Controls />
       </ReactFlow>
     </div>
