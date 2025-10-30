@@ -11,43 +11,24 @@ import {
   useReactFlow,
   Panel,
 } from "@xyflow/react";
-import {
-  Zap, // Trigger
-  Play, // Action
-  Bell, // Notification
-  GitBranch, // Conditional
-  Clock, // Delay
-  RefreshCw, // Loop
-  Workflow, // Sub-process
-  SplitSquareHorizontal, // Parallel
-  GitFork, // Decision
-} from "lucide-react";
 import "@xyflow/react/dist/style.css";
 import { iconNode } from "./customNodes/customNodes";
 import { Navbar } from "./common/Navbar";
 import JsonViewer from "./JsonViewer";
+import { nodeIcons } from "../utill/Icons";
+import { NodeCard } from "./common/NodeCard";
 const nodeTypes = {
-  Trigger: iconNode,
-  Action: iconNode,
-  Notification: iconNode,
-  Conditional: iconNode,
-  Delay: iconNode,
-  Loop: iconNode,
-  subprocess: iconNode,
-  parallel: iconNode,
-  Descision: iconNode,
+  Trigger: NodeCard,
+  Action: NodeCard,
+  Notification: NodeCard,
+  Conditional: NodeCard,
+  Delay: NodeCard,
+  Loop: NodeCard,
+  Subprocess: NodeCard,
+  Parallel: NodeCard,
+  Decision: NodeCard,
 };
-const nodeIcons = {
-  Trigger: <Zap size={20} />,
-  Action: <Play size={20} />,
-  Notification: <Bell size={20} />,
-  Conditional: <GitBranch size={20} />,
-  Delay: <Clock size={20} />,
-  Loop: <RefreshCw size={20} />,
-  subprocess: <Workflow size={20} />,
-  parallel: <SplitSquareHorizontal size={20} />,
-  Descision: <GitFork size={20} />,
-};
+
 function FlowCanvas() {
   const initialNodes = [];
   const initialEdges = [];
@@ -65,28 +46,31 @@ function FlowCanvas() {
     [setEdges]
   );
 
-  const onDrop = useCallback(
-    (event) => {
-      // event.preventDefault();
-      const type = event.dataTransfer.getData("application/reactflow");
-      if (!type) return;
+const onDrop = useCallback(
+  (event) => {
+    event.preventDefault();
+    const type = event.dataTransfer.getData("application/reactflow");
+    if (!type) return;
 
-      const position = reactFlowInstance.screenToFlowPosition({
-        x: event.clientX - getSidebarWidth(),
-        y: event.clientY,
-      });
-      const id = `${+new Date()}`;
-      let newNode = {
-        id: id,
-        type: type,
-        position,
-        data: { label: `${type} Node`, icon: nodeIcons[type] },
-      };
+    const position = reactFlowInstance.screenToFlowPosition({
+      x: event.clientX - getSidebarWidth(),
+      y: event.clientY,
+    });
 
-      setNodes((nds) => nds.concat(newNode));
-    },
-    [reactFlowInstance, setNodes]
-  );
+    const id = `${Date.now()}`;
+    const nodedata = { type, label: type, isCanvas:true };
+
+    const newNode = {
+      id,
+      type,         // tells React Flow which nodeType to render
+      position,
+      data: nodedata, // pass plain data, not components
+    };
+
+    setNodes((nds) => nds.concat(newNode));
+  },
+  [reactFlowInstance, setNodes]
+);
 
   return (
     <div
@@ -95,7 +79,7 @@ function FlowCanvas() {
       onDragOver={(e) => e.preventDefault()}
     >
       <ReactFlow
-       className="bg-black"
+        className="bg-black"
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
