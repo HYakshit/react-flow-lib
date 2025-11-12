@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Undo2, Redo2 } from "lucide-react";
+import { Undo2, Redo2, RotateCcw } from "lucide-react";
 
-export const Navbar = ({ onUndo, onRedo, canUndo, canRedo }) => {
+export const Navbar = ({ onUndo, onRedo, onReset, canUndo, canRedo }) => {
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
@@ -27,6 +27,15 @@ export const Navbar = ({ onUndo, onRedo, canUndo, canRedo }) => {
         >
           <Redo2 size={18} />
           <span className="hidden sm:inline">Redo</span>
+        </button>
+        <div className="divider divider-horizontal mx-1"></div>
+        <button
+          onClick={onReset}
+          className="btn btn-sm btn-ghost btn-error"
+          title="Reset - Clear all nodes, edges, and history"
+        >
+          <RotateCcw size={18} />
+          <span className="hidden sm:inline">Reset</span>
         </button>
       </div>
     </div>

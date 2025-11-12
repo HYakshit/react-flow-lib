@@ -121,6 +121,29 @@ function FlowCanvas() {
     }
   }, [setNodes, setEdges, updateUndoRedoState]);
 
+  // Reset function - clears all nodes, edges, and history
+  const reset = useCallback(() => {
+    const confirmReset = window.confirm("Are you sure you want to reset the flowchart?");
+    if (!confirmReset) return;
+  
+    // Clear nodes and edges
+    isUndoRedoRef.current = true;
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+    
+    // Reset history
+    historyRef.current = [{ nodes: initialNodes, edges: initialEdges }];
+    historyIndexRef.current = 0;
+    
+    // Update undo/redo state
+    updateUndoRedoState();
+    
+    // Reset viewport to fit view
+    setTimeout(() => {
+      reactFlowInstance.fitView();
+    }, 0);
+  }, [setNodes, setEdges, updateUndoRedoState, reactFlowInstance]);
+  
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -192,7 +215,13 @@ const onDrop = useCallback(
       >
         <Panel position="top-center">
           {" "}
-          <Navbar onUndo={undo} onRedo={redo} canUndo={canUndo} canRedo={canRedo}></Navbar>{" "}
+          <Navbar 
+            onUndo={undo} 
+            onRedo={redo} 
+            onReset={reset}
+            canUndo={canUndo} 
+            canRedo={canRedo}
+          ></Navbar>{" "}
         </Panel>
         <Panel position="bottom-right">
           {" "}
