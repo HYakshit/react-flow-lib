@@ -13,7 +13,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="p-1 bg-gray-100" style={{ width: `${sidebarWidth}px` }}>
+    <div className=" bg-gray-100" style={{ width: `${sidebarWidth}px` }}>
       <aside className={`bg-white h-screen rounded-2xl p-4`}>
         <h2 className="font-bold mb-8">Nodes Library</h2>
         <div className="flex flex-col gap-2">
