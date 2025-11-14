@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rjsf/core": "^6.1.0",
+    "@rjsf/utils": "^6.1.0",
+    "@rjsf/validator-ajv8": "^6.1.0",
     "@tailwindcss/vite": "^4.1.12",
     "@xyflow/react": "^12.8.4",
     "lucide-react": "^0.544.0",
