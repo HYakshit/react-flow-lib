@@ -1,8 +1,6 @@
 function JsonViewer({ nodes, edges, show, handleSetShow }) {
-  console.log("nodes", nodes);
 
   const jsonData = JSON.stringify({ nodes, edges }, null, 2);
-  console.log("jsonData", jsonData);
   return (
     <div className="flex justify-center items-center mt-4">
       {!show && (

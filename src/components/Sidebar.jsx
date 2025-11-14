@@ -17,7 +17,7 @@ export default function Sidebar() {
       <aside className={`bg-white h-screen rounded-2xl p-4`}>
         <h2 className="font-bold mb-8">Nodes Library</h2>
         <div className="flex flex-col gap-2">
-          {nodes.map((data) => NodeCard({ data , onDragStart}))}
+          {nodes.map((data) => NodeCard({ data , onDragStart, isCanvas:false}))}
         </div>
       </aside>
     </div>

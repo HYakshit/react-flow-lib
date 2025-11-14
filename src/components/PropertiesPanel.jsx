@@ -1,15 +1,13 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import JsonForm from "./JsonForm";
 
-export default function PropertiesPanel({
-  selectedNode,
-
-  onUpdateNode,
-}) {
+export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
+  const allOpen = false;
   const [openSections, setOpenSections] = React.useState({
-    general: true,
-    schedule: true,
-    retry: false,
+    general: allOpen,
+    schedule: allOpen,
+    retry: allOpen,
   });
 
   const toggleSection = (key) => {
@@ -170,6 +168,15 @@ export default function PropertiesPanel({
               </div>
             </Section>
           )}
+
+          {/* ---------- Form SECTION ---------- */}
+          <Section
+            title="Form information"
+            open={openSections.Form}
+            toggle={() => toggleSection("Form")}
+          >
+            <JsonForm></JsonForm>
+          </Section>
         </div>
       </div>
     </div>

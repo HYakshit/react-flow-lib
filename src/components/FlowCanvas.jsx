@@ -10,13 +10,14 @@ import {
   useEdgesState,
   useReactFlow,
   Panel,
+  MarkerType,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { iconNode } from "./customNodes/customNodes";
 import { Navbar } from "./common/Navbar";
 import JsonViewer from "./JsonViewer";
-import { nodeIcons } from "../utill/Icons";
 import { NodeCard } from "./common/NodeCard";
+import { nodeIcons } from "../utill/Icons";
+import { iconNode } from "./customNodes/customNodes";
 import PropertiesPanel from "./PropertiesPanel";
 const nodeTypes = {
   Trigger: NodeCard,
@@ -32,7 +33,7 @@ const nodeTypes = {
 
 function FlowCanvas() {
   const initialNodes = [];
-  const initialEdges = [];
+  const initialEdges = [{ markerEnd: { type: MarkerType.ArrowClosed } }];
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -105,7 +106,9 @@ function FlowCanvas() {
       const previousState = historyRef.current[historyIndexRef.current];
       isUndoRedoRef.current = true;
       setNodes(previousState.nodes);
-      setEdges(previousState.edges);
+      setEdges(previousState.edges, {
+        markerEnd: { type: MarkerType.ArrowClosed },
+      });
       updateUndoRedoState();
     }
   }, [setNodes, setEdges, updateUndoRedoState]);
@@ -117,7 +120,9 @@ function FlowCanvas() {
       const nextState = historyRef.current[historyIndexRef.current];
       isUndoRedoRef.current = true;
       setNodes(nextState.nodes);
-      setEdges(nextState.edges);
+      setEdges(nextState.edges, {
+        markerEnd: { type: MarkerType.ArrowClosed },
+      });
       updateUndoRedoState();
     }
   }, [setNodes, setEdges, updateUndoRedoState]);
@@ -174,7 +179,16 @@ function FlowCanvas() {
     setShow(val);
   }
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) =>
+      setEdges((eds) =>
+        addEdge(
+          {
+            ...params,
+            markerEnd: { type: MarkerType.ArrowClosed },
+          },
+          eds
+        )
+      ),
     [setEdges]
   );
 
@@ -204,7 +218,6 @@ function FlowCanvas() {
     [reactFlowInstance, setNodes]
   );
 
-
   return (
     <div
       className="w-full h-full bg-gray-100"
@@ -220,6 +233,7 @@ function FlowCanvas() {
         onConnect={onConnect}
         fitView
         nodeTypes={nodeTypes}
+        defaultViewport={{ x: 0, y: 0, zoom: 1 }}
       >
         <Panel position="top-center">
           {" "}
@@ -246,7 +260,6 @@ function FlowCanvas() {
         </Panel> */}
         <Controls />
       </ReactFlow>
-      
     </div>
   );
 }
