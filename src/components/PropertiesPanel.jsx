@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import JsonForm from "./JsonForm";
+import nodeTriggerTypes from "../formData/nodeTriggerTypes";
+import TriggerScheduleForm from "../formData/Trigger/Forms/TriggerScheduleForm/TriggerScheduleForm";
+import RetrySettingsForm from "../formData/Trigger/Forms/RetrySettingsForm/RetrySettingsForm";
+import GeneralForm from "../formData/Trigger/Forms/GeneralForm/GeneralForm";
 
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
+  const [selectedType, setSelectedType] = useState(
+    selectedNode?.data?.triggerType || ""
+  );
+  const options = nodeTriggerTypes[selectedNode?.label] || [];
   const allOpen = false;
   const [openSections, setOpenSections] = React.useState({
-    general: allOpen,
-    schedule: allOpen,
-    retry: allOpen,
+    GeneralInformation: allOpen,
+    TriggerSchedule: allOpen,
+    RetrySettings: allOpen,
   });
+// RESET OPEN SECTIONS WHEN NODE CHANGES
+useEffect(() => {
+  setOpenSections({
+    GeneralInformation: false,
+    TriggerSchedule: false,
+    RetrySettings: false,
+  });
+}, [selectedNode?.id]);
 
   const toggleSection = (key) => {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const onTypeChange = (type) => {
+    setSelectedType(type);
+
+    // TODO: update node data or page content
+    console.log("Selected type:", type);
   };
 
   //  COLLAPSED VIEW (NO NODE SELECTED)
@@ -36,146 +57,50 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
           <h2 className="text-lg font-semibold">{selectedNode.label}</h2>
           <p className="text-xs text-gray-500">{selectedNode.type}</p>
         </div>
-
         <div className="  overflow-y-auto h-[calc(100%-72px)] flex flex-col">
-          {/* ---------- GENERAL INFO SECTION ---------- */}
-          <Section
-            title="General information"
-            open={openSections.general}
-            toggle={() => toggleSection("general")}
-          >
-            <div className="flex p-3 flex-col gap-4">
-              {/* Trigger Type */}
-              <label className="text-sm font-medium text-gray-600">
-                Trigger Type
-              </label>
+          {/* ---------- Form SECTION ---------- */}
+          <div>
+            {/* sub HEADER */}
+            <div className="px-5 py-4 border-b">
+              <h2 className="text-lg font-semibold">
+                {selectedNode.label} Type
+              </h2>
+
+              {/* Dropdown */}
               <select
-                className="input"
-                value={selectedNode.triggerType || ""}
-                onChange={(e) => onUpdateNode({ triggerType: e.target.value })}
+                value={selectedType}
+                onChange={(e) => onTypeChange(e.target.value)}
+                className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
               >
-                <option>Time-based Trigger</option>
-                <option>Manual Trigger</option>
+                {options.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
               </select>
-
-              {/* Title */}
-              <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Title
-                </label>
-                <input
-                  className="input"
-                  value={selectedNode.title || ""}
-                  onChange={(e) => onUpdateNode({ title: e.target.value })}
-                />
-              </div>
-
-              {/* Status */}
-              <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Status
-                </label>
-                <select
-                  className="input"
-                  value={selectedNode.status}
-                  onChange={(e) => onUpdateNode({ status: e.target.value })}
-                >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
-              </div>
-
-              {/* Description */}
-              <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Description
-                </label>
-                <textarea
-                  className="input min-h-[70px]"
-                  value={selectedNode.description || ""}
-                  onChange={(e) =>
-                    onUpdateNode({ description: e.target.value })
-                  }
-                />
-              </div>
             </div>
+          </div>
+          <Section
+            title="General Information"
+            open={openSections.GeneralInformation}
+            toggle={() => toggleSection("GeneralInformation")}
+          >
+            <GeneralForm></GeneralForm>
+          </Section>
+          <Section
+            title="Trigger Schedule"
+            open={openSections.TriggerSchedule}
+            toggle={() => toggleSection("TriggerSchedule")}
+          >
+            <TriggerScheduleForm />
           </Section>
 
-          {/* ---------- TRIGGER SCHEDULE SECTION ---------- */}
-          {selectedNode.type === "trigger" && (
-            <Section
-              title="Trigger Schedule"
-              open={openSections.schedule}
-              toggle={() => toggleSection("schedule")}
-            >
-              <div className="flex p-3 flex-col gap-4">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" />
-                  All Day
-                </label>
-
-                <div className="flex gap-2">
-                  <div>
-                    <label className="text-sm font-medium text-gray-600">
-                      Starts
-                    </label>
-                    <input type="date" className="input" />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium text-gray-600">
-                      Time
-                    </label>
-                    <input type="time" className="input" />
-                  </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <div>
-                    <label className="text-sm font-medium text-gray-600">
-                      Ends
-                    </label>
-                    <input type="date" className="input" />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium text-gray-600">
-                      Time
-                    </label>
-                    <input type="time" className="input" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-gray-600">
-                    Frequency
-                  </label>
-                  <select className="input">
-                    <option>None</option>
-                    <option>Daily</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-gray-600">
-                    Time zone
-                  </label>
-                  <select className="input">
-                    <option>UTC +5:30</option>
-                    <option>UTC -5</option>
-                  </select>
-                </div>
-              </div>
-            </Section>
-          )}
-
-          {/* ---------- Form SECTION ---------- */}
           <Section
-            title="Form information"
-            open={openSections.Form}
-            toggle={() => toggleSection("Form")}
+            title="Retry Settings"
+            open={openSections.RetrySettings}
+            toggle={() => toggleSection("RetrySettings")}
           >
-            <JsonForm></JsonForm>
+            <RetrySettingsForm />
           </Section>
         </div>
       </div>
