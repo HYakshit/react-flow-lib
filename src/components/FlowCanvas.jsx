@@ -11,6 +11,7 @@ import {
   useReactFlow,
   Panel,
   MarkerType,
+  useOnSelectionChange,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { Navbar } from "./common/Navbar";
@@ -31,7 +32,7 @@ const nodeTypes = {
   Decision: NodeCard,
 };
 
-function FlowCanvas() {
+function FlowCanvas({ onNodeSelect }) {
   const initialNodes = [];
   const initialEdges = [{ markerEnd: { type: MarkerType.ArrowClosed } }];
 
@@ -129,8 +130,10 @@ function FlowCanvas() {
 
   // Reset function - clears all nodes, edges, and history
   const reset = useCallback(() => {
-    // const confirmReset = window.confirm("Are you sure you want to reset the flowchart?");
-    // if (!confirmReset) return;
+    const confirmReset = window.confirm(
+      "Are you sure you want to reset the flowchart?"
+    );
+    if (!confirmReset) return;
 
     // Clear nodes and edges
     isUndoRedoRef.current = true;
@@ -218,6 +221,14 @@ function FlowCanvas() {
     [reactFlowInstance, setNodes]
   );
 
+  useOnSelectionChange({
+    onChange: ({ nodes: selectedNodes }) => {
+      if (onNodeSelect) {
+        onNodeSelect(selectedNodes[0] || null);
+      }
+    },
+  });
+
   return (
     <div
       className="w-full h-full bg-gray-100"
@@ -263,10 +274,10 @@ function FlowCanvas() {
     </div>
   );
 }
-export default function FlowCanvasWrapper() {
+export default function FlowCanvasWrapper(props) {
   return (
     <ReactFlowProvider>
-      <FlowCanvas />
+      <FlowCanvas {...props} />
     </ReactFlowProvider>
   );
 }
