@@ -1,4 +1,4 @@
-{
+const nodeTriggerTypes = {
   "Trigger": [
     "Time-based Trigger",
     "Event-based Trigger",
@@ -41,3 +41,4 @@
     "Retry Logic"
   ]
 }
+export default nodeTriggerTypes;

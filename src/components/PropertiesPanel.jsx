@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import JsonForm from "./JsonForm";
-
+import nodeTriggerTypes from "../formData/nodeTriggerTypes";
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
+  const [selectedType, setSelectedType] = useState(
+    selectedNode?.data?.triggerType || ""
+  );
+  const options = nodeTriggerTypes[selectedNode?.label] || [];
   const allOpen = false;
   const [openSections, setOpenSections] = React.useState({
     general: allOpen,
@@ -12,6 +16,12 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
 
   const toggleSection = (key) => {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const onTypeChange = (type) => {
+    setSelectedType(type);
+
+    // TODO: update node data or page content
+    console.log("Selected type:", type);
   };
 
   //  COLLAPSED VIEW (NO NODE SELECTED)
@@ -41,12 +51,26 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
           <div>
             {/* sub HEADER */}
             <div className="px-5 py-4 border-b">
-              <h2 className="text-lg font-semibold">{selectedNode.label}</h2>
-              <p className="text-xs text-gray-500">{selectedNode.type}</p>
+              <h2 className="text-lg font-semibold">
+                {selectedNode.label} Type
+              </h2>
+
+              {/* Dropdown */}
+              <select
+                value={selectedType}
+                onChange={(e) => onTypeChange(e.target.value)}
+                className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
+              >
+                {options.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <Section
-            title="Form information"
+            title="General Information"
             open={openSections.Form}
             toggle={() => toggleSection("Form")}
           >
