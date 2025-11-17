@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import JsonForm from "./JsonForm";
 import nodeTriggerTypes from "../formData/nodeTriggerTypes";
+import TriggerScheduleForm from "../formData/Trigger/Forms/TriggerScheduleForm/TriggerScheduleForm";
+import RetrySettingsForm from "../formData/Trigger/Forms/RetrySettingsForm/RetrySettingsForm";
+import GeneralForm from "../formData/Trigger/Forms/GeneralForm/GeneralForm";
+
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const [selectedType, setSelectedType] = useState(
     selectedNode?.data?.triggerType || ""
@@ -9,10 +12,18 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const options = nodeTriggerTypes[selectedNode?.label] || [];
   const allOpen = false;
   const [openSections, setOpenSections] = React.useState({
-    general: allOpen,
-    schedule: allOpen,
-    retry: allOpen,
+    GeneralInformation: allOpen,
+    TriggerSchedule: allOpen,
+    RetrySettings: allOpen,
   });
+// RESET OPEN SECTIONS WHEN NODE CHANGES
+useEffect(() => {
+  setOpenSections({
+    GeneralInformation: false,
+    TriggerSchedule: false,
+    RetrySettings: false,
+  });
+}, [selectedNode?.id]);
 
   const toggleSection = (key) => {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -71,10 +82,25 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
           </div>
           <Section
             title="General Information"
-            open={openSections.Form}
-            toggle={() => toggleSection("Form")}
+            open={openSections.GeneralInformation}
+            toggle={() => toggleSection("GeneralInformation")}
           >
-            <JsonForm></JsonForm>
+            <GeneralForm></GeneralForm>
+          </Section>
+          <Section
+            title="Trigger Schedule"
+            open={openSections.TriggerSchedule}
+            toggle={() => toggleSection("TriggerSchedule")}
+          >
+            <TriggerScheduleForm />
+          </Section>
+
+          <Section
+            title="Retry Settings"
+            open={openSections.RetrySettings}
+            toggle={() => toggleSection("RetrySettings")}
+          >
+            <RetrySettingsForm />
           </Section>
         </div>
       </div>

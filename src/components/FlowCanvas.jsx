@@ -129,7 +129,9 @@ function FlowCanvas() {
 
   // Reset function - clears all nodes, edges, and history
   const reset = useCallback(() => {
-    const confirmReset = window.confirm("Are you sure you want to reset the flowchart?");
+    const confirmReset = window.confirm(
+      "Are you sure you want to reset the flowchart?"
+    );
     if (!confirmReset) return;
 
     // Clear nodes and edges
