@@ -14,6 +14,7 @@ export const NodeCard = ({ data, onDragStart }) => {
         data.isCanvas ? `w-25 h-6` : "w-50 h-15"
       }`}
     >
+      {/* icon */}
       <div
         className={`flex items-center justify-center   rounded-sm bg-gray-100 text-blue-500 ${
         data.isCanvas ? "w-4 h-4" : "w-8 h-8"
@@ -23,6 +24,7 @@ export const NodeCard = ({ data, onDragStart }) => {
       </div>
 
       <div className="flex flex-col">
+        {/* label */}
         <span
           className={`font-medium  text-gray-800 ${
             data.isCanvas ? " text-[8px]" : " text-md"
@@ -30,6 +32,7 @@ export const NodeCard = ({ data, onDragStart }) => {
         >
           {data.label || data.type}
         </span>
+        {/* description */}
         <span
           className={` text-gray-500 ${
             data.isCanvas ? "text-[6px]" : "text-sm"

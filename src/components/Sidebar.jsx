@@ -1,6 +1,5 @@
-import { useCallback } from "react";
-import { nodeIcons } from "../utill/Icons";
-import { nodeDescription, nodes } from "../utill/NodeConstants";
+
+import {  nodes } from "../utill/NodeConstants";
 import { NodeCard } from "./common/NodeCard";
 
 const sidebarWidth = 250;

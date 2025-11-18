@@ -3,8 +3,9 @@ import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import GeneralSchema from "./GeneralSchema";
 import GeneralUiSchema from "./GeneralUiSchema";
+import { nodeDescription } from "../../../utill/NodeConstants";
 
-const GeneralForm = () => {
+const GeneralForm = ({ nodeLabel }) => {
   const log = (type) => console.log.bind(console, type);
 
   return (
@@ -12,6 +13,9 @@ const GeneralForm = () => {
       <Form
         schema={GeneralSchema}
         uiSchema={GeneralUiSchema}
+        formData={{
+          description: nodeDescription[nodeLabel],
+        }}
         validator={validator}
         onChange={log("changed")}
         onSubmit={log("submitted")}

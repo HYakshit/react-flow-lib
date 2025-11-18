@@ -1,9 +1,8 @@
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 import { getSidebarWidth } from "./Sidebar";
 import {
   ReactFlow,
   addEdge,
-  Background,
   Controls,
   ReactFlowProvider,
   useNodesState,
@@ -17,9 +16,6 @@ import "@xyflow/react/dist/style.css";
 import { Navbar } from "./common/Navbar";
 import JsonViewer from "./JsonViewer";
 import { NodeCard } from "./common/NodeCard";
-import { nodeIcons } from "../utill/Icons";
-import { iconNode } from "./customNodes/customNodes";
-import PropertiesPanel from "./PropertiesPanel";
 const nodeTypes = {
   Trigger: NodeCard,
   Action: NodeCard,

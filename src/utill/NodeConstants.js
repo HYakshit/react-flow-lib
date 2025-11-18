@@ -21,3 +21,4 @@ export  const nodes = [
   Parallel: "Run simultaneously",
   Decision: "Make choice",
 };
+

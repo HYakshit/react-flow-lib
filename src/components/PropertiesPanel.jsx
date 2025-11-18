@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import nodeTriggerTypes from "../formData/nodeTriggerTypes";
-import TriggerScheduleForm from "../formData/Trigger/Forms/TriggerScheduleForm/TriggerScheduleForm";
-import RetrySettingsForm from "../formData/Trigger/Forms/RetrySettingsForm/RetrySettingsForm";
-import GeneralForm from "../formData/Trigger/Forms/GeneralForm/GeneralForm";
+import TriggerForm from "../formData/Trigger/TriggerForm";
+import ApiCallForm from "../formData/Action/actionForms/ApiCallForm/ApiCallForm";
+import ActionForm from "../formData/Action/ActionForm";
 
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const options = nodeTriggerTypes[selectedNode?.type] || [];
@@ -16,7 +16,16 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
     TriggerSchedule: allOpen,
     RetrySettings: allOpen,
   });
-
+  const FormCategoryMap = {
+    Trigger: TriggerForm, // You create this
+    Action: ActionForm,         // This will internally choose API/DB/Email/etc.
+    // Delay: DelayFormSelector,
+    // Conditional: ConditionalFormSelector,
+    // Decision: DecisionFormSelector,
+    // Notification: NotificationFormSelector,
+    // "AI Agent": AIAgentFormSelector,
+    // System: SystemFormSelector
+  };
   useEffect(() => {
     setOpenSections({
       GeneralInformation: false,
@@ -51,15 +60,26 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const nodeLabel =
     selectedNode?.data?.label || selectedNode?.label || selectedNode?.type;
   const showAdditionalSections = selectedType === "Time-based Trigger";
+console.log("PropertiesPanel - nodeLabel:", nodeLabel);
+  const CategoryComponent = FormCategoryMap[nodeLabel];
+
+  //  function FormRenderer({ selectedCategory, selectedSubtype, nodeData,  ...restProps    }) {
+  //   const CategoryComponent = FormCategoryMap[selectedCategory] || GeneralForm;
+
+  //   return (
+  //     <CategoryComponent
+  //       subtype={selectedSubtype}
+  //       nodeData={nodeData}
+  //     />
+  //   );
+  // }
 
   //  COLLAPSED VIEW (NO NODE SELECTED)
-
   if (!selectedNode) {
     return (
-      <div className="p-1 ">
-        <div className="w-[80px] border-l bg-white rounded-2xl shadow-sm flex items-center px-4 py-3 text-gray-700 font-medium">
+      <div className=" bg-gray-100">
+        <div className="w-[230px] border-l mt-8 bg-white rounded-2xl shadow-sm flex items-center px-4 py-3 text-gray-700 font-medium">
           <span>Properties</span>
-          <span className="ml-auto text-xl font-bold">⋯</span>
         </div>
       </div>
     );
@@ -70,63 +90,33 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
     <div className=" bg-gray-100 ">
       <div className="w-[330px]  h-full  rounded-2xl bg-white  border-0 shadow-sm  ">
         {/* HEADER */}
-        <div className="px-5 py-4 border-b">
+        <span className="mt-8 font-bold ml-4">Properties</span>
+        <div className="px-5 py-2 border-b">
           <h2 className="text-lg font-semibold">{nodeLabel}</h2>
           <p className="text-xs text-gray-500">{selectedNode.type}</p>
         </div>
-        <div className="  overflow-y-auto h-[calc(100%-72px)] flex flex-col">
-          {/* ---------- Form SECTION ---------- */}
-          <div>
-            {/* sub HEADER */}
-            <div className="px-5 py-4 border-b">
-              <h2 className="text-lg font-semibold">{nodeLabel} Type</h2>
-
-              {options.length ? (
-                <select
-                  value={selectedType}
-                  onChange={(e) => onTypeChange(e.target.value)}
-                  className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-                >
-                  {options.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <p className="mt-3 text-xs text-gray-500">
-                  No configuration available for this node type.
-                </p>
-              )}
-            </div>
-          </div>
-          <Section
-            title="General Information"
-            open={openSections.GeneralInformation}
-            toggle={() => toggleSection("GeneralInformation")}
-          >
-            <GeneralForm />
-          </Section>
-          {showAdditionalSections && (
-            <>
-              <Section
-                title="Trigger Schedule"
-                open={openSections.TriggerSchedule}
-                toggle={() => toggleSection("TriggerSchedule")}
-              >
-                <TriggerScheduleForm />
-              </Section>
-
-              <Section
-                title="Retry Settings"
-                open={openSections.RetrySettings}
-                toggle={() => toggleSection("RetrySettings")}
-              >
-                <RetrySettingsForm />
-              </Section>
-            </>
-          )}
-        </div>
+        <CategoryComponent
+          // subtype={selectedSubtype}
+          // nodeData={nodeData}
+          nodeLabel={nodeLabel}
+          options={options}
+          selectedType={selectedType}
+          onTypeChange={onTypeChange}
+          toggleSection={toggleSection}
+          openSections={openSections}
+          showAdditionalSections={showAdditionalSections}
+          Section={Section}
+        />
+        {/* <TriggerForm
+          nodeLabel={nodeLabel}
+          options={options}
+          selectedType={selectedType}
+          onTypeChange={onTypeChange}
+          toggleSection={toggleSection}
+          openSections={openSections}
+          showAdditionalSections={showAdditionalSections}
+          Section={Section}
+        /> */}
       </div>
     </div>
   );
@@ -149,3 +139,4 @@ function Section({ title, children, open, toggle, noToggle = false }) {
     </div>
   );
 }
+export { Section };
