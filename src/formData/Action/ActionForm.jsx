@@ -61,7 +61,11 @@ export const ActionForm = ({
           )}
         </div>
       </div>
-   
+      <Section
+        title="General Information"
+        open={openSections.GeneralInformation}
+        toggle={() => toggleSection("GeneralInformation")}
+      >
         <FormRenderer selectedType={selectedType} nodeData={nodeLabel} />{" "}
       </Section>
     </div>
