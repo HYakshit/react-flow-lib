@@ -1,6 +1,6 @@
 import { Handle } from "@xyflow/react";
 import { nodeIcons } from "../../utill/Icons";
-import { nodeDescription } from "../../utill/NodeConstants";
+import { NODEDESCRIPTION } from "../../utill/NodeConstants";
 
 export const NodeCard = ({ data, onDragStart }) => {
   if (!data) return null; // prevent errors
@@ -39,14 +39,14 @@ export const NodeCard = ({ data, onDragStart }) => {
           }`}
         >
 
-          {nodeDescription[data.type]}
+          {NODEDESCRIPTION[data.type]}
         </span>
       </div>
       {data.isCanvas && (
         <>
           {" "}
-          <Handle type="source" position="top" />
-          <Handle type="target" position="bottom" />
+          <Handle type="source" position="bottom" />
+          <Handle type="target" position="top" />
         </>
       )}
     </div>

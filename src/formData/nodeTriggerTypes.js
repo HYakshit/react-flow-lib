@@ -1,44 +1,35 @@
 const nodeTriggerTypes = {
-  "Trigger": [
+  Trigger: [
+    "Select Type",
     "Time-based Trigger",
     "Event-based Trigger",
     "Conditional Trigger",
-    "System Trigger"
+    "System Trigger",
   ],
-  "Action": [
+  Action: [
+    "Select Type",
+
     "API Call",
     "Database Update",
     "Send Email",
     "Webhook",
-    "File Operations"
+    "File Operations",
   ],
-  "Delay": [
+  Delay: [
+    "Select Type",
+
     "Wait for Duration",
     "Wait until Date/Time",
-    "Pause until Condition"
+    "Pause until Condition",
   ],
-  "Conditional": [
-    "If Condition Met",
-    "If Not Met"
-  ],
-  "Decision": [
-    "Switch/Route Based on Value",
-    "Multi-Branch Decision"
-  ],
-  "Notification": [
+  Conditional: ["If Condition Met", "If Not Met"],
+  Decision: ["Switch/Route Based on Value", "Multi-Branch Decision"],
+  Notification: [
     "Send Email Notification",
     "Send Push Notification",
-    "Send SMS Notification"
+    "Send SMS Notification",
   ],
-  "AI Agent": [
-    "Text Analysis",
-    "Image Processing",
-    "Chatbot Response"
-  ],
-  "System": [
-    "Log Event",
-    "Error Handling",
-    "Retry Logic"
-  ]
-}
+  "AI Agent": ["Text Analysis", "Image Processing", "Chatbot Response"],
+  System: ["Log Event", "Error Handling", "Retry Logic"],
+};
 export default nodeTriggerTypes;

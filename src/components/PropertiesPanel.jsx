@@ -1,36 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import nodeTriggerTypes from "../formData/nodeTriggerTypes";
 import TriggerForm from "../formData/Trigger/TriggerForm";
-import ApiCallForm from "../formData/Action/actionForms/ApiCallForm/ApiCallForm";
 import ActionForm from "../formData/Action/ActionForm";
-
+import Section from "../utill/Section";
+import NotificationForm from "../formData/Notification/NotificationForm";
+import DelayForm from "../formData/Delay/DelayForm";
+import ConditionalForm from "../formData/Conditional/ConditionalForm";
+import DecisionForm from "../formData/Decision/DecisionForm";
+import LoopForm from "../formData/Loop/LoopForm";
+import ParallelForm from "../formData/Parallel/ParallelForm";
+import SubProcessForm from "../formData/SubProcessForm/SubProcessForm";
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const options = nodeTriggerTypes[selectedNode?.type] || [];
   const [selectedType, setSelectedType] = useState(
     selectedNode?.data?.triggerType || options[0] || ""
   );
+  console.log("selectedNode", selectedType);
   const allOpen = false;
   const [openSections, setOpenSections] = React.useState({
     GeneralInformation: allOpen,
     TriggerSchedule: allOpen,
     RetrySettings: allOpen,
+    DynamicSection: allOpen,
   });
   const FormCategoryMap = {
-    Trigger: TriggerForm, // You create this
-    Action: ActionForm,         // This will internally choose API/DB/Email/etc.
-    // Delay: DelayFormSelector,
-    // Conditional: ConditionalFormSelector,
-    // Decision: DecisionFormSelector,
-    // Notification: NotificationFormSelector,
-    // "AI Agent": AIAgentFormSelector,
-    // System: SystemFormSelector
+    Action: ActionForm,
+    Conditional: ConditionalForm,
+    Decision: DecisionForm,
+    Delay: DelayForm,
+    Loop: LoopForm,
+    Notification: NotificationForm,
+    Parallel: ParallelForm,
+    Trigger: TriggerForm,
+    SubProcess: SubProcessForm, //fix name it is(Sub-process as key in map)
   };
   useEffect(() => {
     setOpenSections({
       GeneralInformation: false,
       TriggerSchedule: false,
       RetrySettings: false,
+      DynamicSection: false,
     });
   }, [selectedNode?.id]);
 
@@ -60,20 +69,14 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const nodeLabel =
     selectedNode?.data?.label || selectedNode?.label || selectedNode?.type;
   const showAdditionalSections = selectedType === "Time-based Trigger";
-console.log("PropertiesPanel - nodeLabel:", nodeLabel);
   const CategoryComponent = FormCategoryMap[nodeLabel];
-
-  //  function FormRenderer({ selectedCategory, selectedSubtype, nodeData,  ...restProps    }) {
-  //   const CategoryComponent = FormCategoryMap[selectedCategory] || GeneralForm;
-
-  //   return (
-  //     <CategoryComponent
-  //       subtype={selectedSubtype}
-  //       nodeData={nodeData}
-  //     />
-  //   );
-  // }
-
+  console.log(
+    "PropertiesPanel rendered AA",
+    selectedType,
+    nodeLabel,
+    selectedNode,
+    CategoryComponent
+  );
   //  COLLAPSED VIEW (NO NODE SELECTED)
   if (!selectedNode) {
     return (
@@ -123,20 +126,3 @@ console.log("PropertiesPanel - nodeLabel:", nodeLabel);
 }
 
 // SECTION COMPONENT
-function Section({ title, children, open, toggle, noToggle = false }) {
-  return (
-    <div className="border-gray-200 border-t border-b ">
-      <div
-        className="flex justify-between items-center px-3 py-6 cursor-pointer"
-        onClick={!noToggle ? toggle : undefined}
-      >
-        <h3 className="font-semibold text-sm">{title}</h3>
-        {!noToggle &&
-          (open ? <ChevronUp size={18} /> : <ChevronDown size={18} />)}
-      </div>
-
-      {open && <div className="p-3">{children}</div>}
-    </div>
-  );
-}
-export { Section };

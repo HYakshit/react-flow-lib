@@ -1,10 +1,17 @@
+import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
-import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
-import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
-import { Section } from "../../components/PropertiesPanel";
 
-export const TriggerForm = ({ options, selectedType, onTypeChange,nodeLabel, openSections,toggleSection }) => {
-    const showTriggerSections = selectedType === "Time-based Trigger";
+
+export const NotificationForm = ({
+  options,
+  selectedType,
+  onTypeChange,
+  nodeLabel,
+  openSections,
+  toggleSection,
+}) => {
+  console.log("NotificationForm rendered",selectedType);
+  const showTriggerSections = selectedType === "Time-based Trigger";
 
   return (
     <div className="  overflow-y-auto h-[calc(100%-72px)] flex flex-col">
@@ -40,26 +47,26 @@ export const TriggerForm = ({ options, selectedType, onTypeChange,nodeLabel, ope
       >
         <GeneralForm nodeLabel={nodeLabel} />
       </Section>
-      {showTriggerSections && (
+      {/* {showTriggerSections && (
         <>
           <Section
-            title="Trigger Schedule"
-            open={openSections.TriggerSchedule}
-            toggle={() => toggleSection("TriggerSchedule")}
+            title="Send Email Notification"
+            open={openSections.SendEmailNotification}
+            toggle={() => toggleSection("SendEmailNotification")}
           >
-            <TriggerScheduleForm />
+            <SendEmailNotificationForm />
           </Section>
 
           <Section
-            title="Retry Settings"
-            open={openSections.RetrySettings}
-            toggle={() => toggleSection("RetrySettings")}
+            title="Send Push Notification"
+            open={openSections.SendPushNotification}
+            toggle={() => toggleSection("SendPushNotification")}
           >
-            <RetrySettingsForm />
+            <SendPushNotificationForm />
           </Section>
         </>
-      )}
+      )} */}
     </div>
   );
 };
-export default TriggerForm;
+export default NotificationForm;

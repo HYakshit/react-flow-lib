@@ -17,7 +17,7 @@ export const nodeIcons = {
   Conditional: <GitBranch size={20} />,
   Delay: <Clock size={20} />,
   Loop: <RefreshCw size={20} />,
-  Subprocess: <Workflow size={20} />,
+  SubProcess: <Workflow size={20} />,
   Parallel: <SplitSquareHorizontal size={20} />,
   Decision: <GitFork size={20} />,
 };

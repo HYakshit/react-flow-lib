@@ -1,9 +1,9 @@
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
 import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
 import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
-import { Section } from "../../components/PropertiesPanel";
+import Section from "../../utill/Section";
 
-export const TriggerForm = ({ options, selectedType, onTypeChange,nodeLabel, openSections,toggleSection }) => {
+export const DelayForm = ({ options, selectedType, onTypeChange,nodeLabel, openSections,toggleSection }) => {
     const showTriggerSections = selectedType === "Time-based Trigger";
 
   return (
@@ -62,4 +62,4 @@ export const TriggerForm = ({ options, selectedType, onTypeChange,nodeLabel, ope
     </div>
   );
 };
-export default TriggerForm;
+export default DelayForm;

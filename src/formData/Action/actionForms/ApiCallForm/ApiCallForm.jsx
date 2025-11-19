@@ -3,7 +3,6 @@ import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import ApiCallFormSchema from "./ApiCallFormSchema";
 import ApiCallFormUiSchema from "./ApiCallFormUiSchema";
-import { nodeDescription } from "../../../../utill/NodeConstants";
 
 const ApiCallForm = ({ nodeLabel }) => {
   const log = (type) => console.log.bind(console, type);
@@ -13,7 +12,6 @@ const ApiCallForm = ({ nodeLabel }) => {
       <Form
         schema={ApiCallFormSchema}
         uiSchema={ApiCallFormUiSchema}
-      
         validator={validator}
         onChange={log("changed")}
         onSubmit={log("submitted")}

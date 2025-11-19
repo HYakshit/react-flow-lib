@@ -1,21 +1,17 @@
 // JsonForm.jsx
 import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
-import GeneralSchema from "./GeneralSchema";
-import GeneralUiSchema from "./GeneralUiSchema";
-import { NODEDESCRIPTION } from "../../../utill/NodeConstants";
+import EventBasedFormSchema from "./EventBasedSchema";
+import EventBasedFormUiSchema from "./EventBasedUiSchema";
 
-const GeneralForm = ({ nodeLabel }) => {
+const EventBasedForm = ({ nodeLabel }) => {
   const log = (type) => console.log.bind(console, type);
 
   return (
     <div style={{ maxWidth: 500, margin: "0 auto" }}>
       <Form
-        schema={GeneralSchema}
-        uiSchema={GeneralUiSchema}
-        formData={{
-          description: NODEDESCRIPTION[nodeLabel],
-        }}
+        schema={EventBasedFormSchema}
+        uiSchema={EventBasedFormUiSchema}
         validator={validator}
         onChange={log("changed")}
         onSubmit={log("submitted")}
@@ -30,4 +26,4 @@ const GeneralForm = ({ nodeLabel }) => {
   );
 };
 
-export default GeneralForm;
+export default EventBasedForm;

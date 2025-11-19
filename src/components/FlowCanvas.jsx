@@ -23,7 +23,7 @@ const nodeTypes = {
   Conditional: NodeCard,
   Delay: NodeCard,
   Loop: NodeCard,
-  Subprocess: NodeCard,
+  SubProcess: NodeCard,
   Parallel: NodeCard,
   Decision: NodeCard,
 };

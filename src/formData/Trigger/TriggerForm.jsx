@@ -1,7 +1,7 @@
+import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
 import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
 import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
-import { Section } from "../../components/PropertiesPanel";
 
 export const TriggerForm = ({
   options,
@@ -11,7 +11,6 @@ export const TriggerForm = ({
   openSections,
   toggleSection,
 }) => {
-  
   const showTriggerSections = selectedType === "Time-based Trigger";
 
   return (
@@ -28,7 +27,6 @@ export const TriggerForm = ({
               onChange={(e) => onTypeChange(e.target.value)}
               className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
             >
-              <option>Select Type</option>
               {options.map((opt) => (
                 <option key={opt} value={opt}>
                   {opt}
