@@ -28,19 +28,19 @@ export const ActionForm = ({
       case "Send Email":
         return {
           label: "Email Settings",
-          component: <SendEmailForm />,
+          // component: <SendEmailForm />,
         };
 
       case "Webhook":
         return {
           label: "Webhook Settings",
-          component: <WebhookForm />,
+          // component: <WebhookForm />,
         };
 
       case "File Operations":
         return {
           label: "File Operation Settings",
-          component: <FileOperationForm />,
+          // component: <FileOperationForm />,
         };
 
       default:
@@ -53,7 +53,6 @@ export const ActionForm = ({
 
   const { label: dynamicSectionLabel, component: dynamicForm } =
     getFormComponent(selectedType);
-  console.log("ActionForm - dynamicSectionLabel:", dynamicSectionLabel);
 
   return (
     <div className="overflow-y-auto h-[calc(100%-72px)] flex flex-col">
@@ -95,7 +94,7 @@ export const ActionForm = ({
         open={openSections.DynamicSection}
         toggle={() => toggleSection("DynamicSection")}
       >
-        {dynamicForm}
+        {dynamicForm && dynamicForm}
       </Section>
     </div>
   );
