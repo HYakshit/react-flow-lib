@@ -17,6 +17,7 @@ export const NodeType = Object.freeze(
 );
 
 export const ActionType = Object.freeze({
+  SelectType: "Select Type",
   APICall: "API Call",
   DatabaseUpdate: "Database Update",
   SendEmail: "Send Email",
@@ -24,6 +25,7 @@ export const ActionType = Object.freeze({
   FileOperations: "File Operations",
 });
 export const TriggerType = Object.freeze({
+  SelectType: "Select Type",
   TimeBased: "Time-based Trigger",
   EventBased: "Event-based Trigger",
   Conditional: "Conditional Trigger",

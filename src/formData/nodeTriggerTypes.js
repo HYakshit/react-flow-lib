@@ -9,7 +9,7 @@ import {
 } from "../utill/NodeConstants";
 const nodeTriggerTypes = {
   [NodeType.Action]: [
-    "Select Type",
+    ActionType.SelectType,
     ActionType.APICall,
     ActionType.DatabaseUpdate,
     ActionType.SendEmail,
@@ -18,7 +18,7 @@ const nodeTriggerTypes = {
   ],
 
   [NodeType.Trigger]: [
-    "Select Type",
+    TriggerType.SelectType,
     TriggerType.TimeBased,
     TriggerType.EventBased,
     TriggerType.Conditional,

@@ -16,7 +16,6 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const [selectedType, setSelectedType] = useState(
     selectedNode?.data?.triggerType || options[0] || ""
   );
-  console.log("selectedNode", selectedType);
   const allOpen = false;
   const [openSections, setOpenSections] = React.useState({
     GeneralInformation: allOpen,
