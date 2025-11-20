@@ -1,35 +1,46 @@
+import {
+  NodeType,
+  ActionType,
+  TriggerType,
+  DelayType,
+  ConditionalType,
+  DecisionType,
+  NotificationType,
+} from "../utill/NodeConstants";
 const nodeTriggerTypes = {
-  Trigger: [
+  [NodeType.Action]: [
     "Select Type",
-    "Time-based Trigger",
-    "Event-based Trigger",
-    "Conditional Trigger",
-    "System Trigger",
+    ActionType.APICall,
+    ActionType.DatabaseUpdate,
+    ActionType.SendEmail,
+    ActionType.Webhook,
+    ActionType.FileOperations,
   ],
-  Action: [
-    "Select Type",
 
-    "API Call",
-    "Database Update",
-    "Send Email",
-    "Webhook",
-    "File Operations",
-  ],
-  Delay: [
+  [NodeType.Trigger]: [
     "Select Type",
+    TriggerType.TimeBased,
+    TriggerType.EventBased,
+    TriggerType.Conditional,
+    TriggerType.System,
+  ],
 
-    "Wait for Duration",
-    "Wait until Date/Time",
-    "Pause until Condition",
+  [NodeType.Delay]: [
+    "Select Type",
+    DelayType.WaitDuration,
+    DelayType.WaitUntil,
+    DelayType.PauseUntil,
   ],
-  Conditional: ["If Condition Met", "If Not Met"],
-  Decision: ["Switch/Route Based on Value", "Multi-Branch Decision"],
-  Notification: [
-    "Send Email Notification",
-    "Send Push Notification",
-    "Send SMS Notification",
+
+  [NodeType.Conditional]: [ConditionalType.IfMet, ConditionalType.IfNotMet],
+
+  [NodeType.Decision]: [DecisionType.SwitchRoute, DecisionType.MultiBranch],
+
+  [NodeType.Notification]: [
+    NotificationType.Email,
+    NotificationType.Push,
+    NotificationType.SMS,
   ],
-  "AI Agent": ["Text Analysis", "Image Processing", "Chatbot Response"],
-  System: ["Log Event", "Error Handling", "Retry Logic"],
 };
+
 export default nodeTriggerTypes;

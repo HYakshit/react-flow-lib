@@ -7,18 +7,20 @@ export const NodeCard = ({ data, onDragStart }) => {
 
   return (
     <div
+      tabIndex={0}
       key={data.type}
       draggable={!!onDragStart}
       onDragStart={(e) => onDragStart && onDragStart(e, data.type)}
-      className={`flex cursor-pointer items-center gap-3 p-1.5 border border-gray-100 rounded-md hover:shadow-sm transition-shadow bg-white ${
-        data.isCanvas ? `w-25 h-6` : "w-50 h-15"
-      }`}
+      className={`flex cursor-pointer items-center gap-3 p-1.5 border border-gray-100 rounded-md 
+              hover:shadow-sm transition-shadow bg-white
+              focus:outline-none focus:border-blue-500 focus:shadow-md
+              ${data.isCanvas ? "w-25 h-6" : "w-50 h-15"}`}
     >
       {/* icon */}
       <div
         className={`flex items-center justify-center   rounded-sm bg-gray-100 text-blue-500 ${
-        data.isCanvas ? "w-4 h-4" : "w-8 h-8"
-      }`}
+          data.isCanvas ? "w-4 h-4" : "w-8 h-8"
+        }`}
       >
         {nodeIcons[data.type]}
       </div>
@@ -38,7 +40,6 @@ export const NodeCard = ({ data, onDragStart }) => {
             data.isCanvas ? "text-[6px]" : "text-sm"
           }`}
         >
-
           {NODEDESCRIPTION[data.type]}
         </span>
       </div>

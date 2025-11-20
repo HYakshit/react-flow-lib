@@ -10,6 +10,7 @@ import DecisionForm from "../formData/Decision/DecisionForm";
 import LoopForm from "../formData/Loop/LoopForm";
 import ParallelForm from "../formData/Parallel/ParallelForm";
 import SubProcessForm from "../formData/SubProcessForm/SubProcessForm";
+import { NodeType } from "../utill/NodeConstants";
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const options = nodeTriggerTypes[selectedNode?.type] || [];
   const [selectedType, setSelectedType] = useState(
@@ -24,16 +25,17 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
     DynamicSection: allOpen,
   });
   const FormCategoryMap = {
-    Action: ActionForm,
-    Conditional: ConditionalForm,
-    Decision: DecisionForm,
-    Delay: DelayForm,
-    Loop: LoopForm,
-    Notification: NotificationForm,
-    Parallel: ParallelForm,
-    Trigger: TriggerForm,
-    SubProcess: SubProcessForm, //fix name it is(Sub-process as key in map)
+    [NodeType.Action]: ActionForm,
+    [NodeType.Conditional]: ConditionalForm,
+    [NodeType.Decision]: DecisionForm,
+    [NodeType.Delay]: DelayForm,
+    [NodeType.Loop]: LoopForm,
+    [NodeType.Notification]: NotificationForm,
+    [NodeType.Parallel]: ParallelForm,
+    [NodeType.Trigger]: TriggerForm,
+    [NodeType.SubProcess]: SubProcessForm, // correct key name
   };
+
   useEffect(() => {
     setOpenSections({
       GeneralInformation: false,
@@ -70,13 +72,7 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
     selectedNode?.data?.label || selectedNode?.label || selectedNode?.type;
   const showAdditionalSections = selectedType === "Time-based Trigger";
   const CategoryComponent = FormCategoryMap[nodeLabel];
-  console.log(
-    "PropertiesPanel rendered AA",
-    selectedType,
-    nodeLabel,
-    selectedNode,
-    CategoryComponent
-  );
+
   //  COLLAPSED VIEW (NO NODE SELECTED)
   if (!selectedNode) {
     return (

@@ -2,6 +2,7 @@ import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
 import ApiCallForm from "./actionForms/ApiCallForm/ApiCallForm";
 import DatabaseUpdateForm from "./actionForms/DatabaseUpdate/DatabaseUpdateForm";
+import { ActionType } from "../../utill/NodeConstants";
 
 export const ActionForm = ({
   options,
@@ -13,34 +14,31 @@ export const ActionForm = ({
 }) => {
   function getFormComponent(type) {
     switch (type) {
-      case "API Call":
+      case ActionType.APICall:
         return {
           label: "API Call Settings",
           component: <ApiCallForm />,
         };
 
-      case "Database Update":
+      case ActionType.DatabaseUpdate:
         return {
           label: "Database Update Settings",
           component: <DatabaseUpdateForm />,
         };
 
-      case "Send Email":
+      case ActionType.SendEmail:
         return {
           label: "Email Settings",
-          // component: <SendEmailForm />,
         };
 
-      case "Webhook":
+      case ActionType.Webhook:
         return {
           label: "Webhook Settings",
-          // component: <WebhookForm />,
         };
 
-      case "File Operations":
+      case ActionType.FileOperations:
         return {
           label: "File Operation Settings",
-          // component: <FileOperationForm />,
         };
 
       default:
@@ -78,24 +76,27 @@ export const ActionForm = ({
           </p>
         )}
       </div>
+      {selectedType == "Select Type" || undefined ? null : (
+        <>
+          {/* ==== Section 1: General Information ==== */}
+          <Section
+            title="General Information"
+            open={openSections.GeneralInformation}
+            toggle={() => toggleSection("GeneralInformation")}
+          >
+            <GeneralForm nodeLabel={nodeLabel} />
+          </Section>
 
-      {/* ==== Section 1: General Information ==== */}
-      <Section
-        title="General Information"
-        open={openSections.GeneralInformation}
-        toggle={() => toggleSection("GeneralInformation")}
-      >
-        <GeneralForm nodeLabel={nodeLabel} />
-      </Section>
-
-      {/* ==== Section 2: Dynamic Settings Form ==== */}
-      <Section
-        title={dynamicSectionLabel}
-        open={openSections.DynamicSection}
-        toggle={() => toggleSection("DynamicSection")}
-      >
-        {dynamicForm && dynamicForm}
-      </Section>
+          {/* ==== Section 2: Dynamic Settings Form ==== */}
+          <Section
+            title={dynamicSectionLabel}
+            open={openSections.DynamicSection}
+            toggle={() => toggleSection("DynamicSection")}
+          >
+            {dynamicForm && dynamicForm}
+          </Section>
+        </>
+      )}
     </div>
   );
 };
