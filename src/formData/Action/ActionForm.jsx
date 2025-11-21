@@ -1,12 +1,10 @@
 import { useMemo } from "react";
 import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
-import ApiCallForm from "./actionForms/ApiCallForm/ApiCallForm";
-import DatabaseUpdateForm from "./actionForms/DatabaseUpdate/DatabaseUpdateForm";
-import { ActionType } from "../../lib/NodeConstants";
+import { Action } from "../../lib/NodeConstants";
 import DropdownForm from "../Forms/DropdownForm/DropdownForm";
 import { actionTypeIcons } from "../../lib/TypeIcons";
-import GetForm from "../../utill/GetForm";
+import { useNodeForm } from "../../hooks/useNodeForm";
 
 export const ActionForm = ({
   options,
@@ -15,6 +13,8 @@ export const ActionForm = ({
   nodeLabel,
   openSections,
   toggleSection,
+  selectedNode,
+  onUpdateNode,
 }) => {
   const dropdownOptions = useMemo(
     () =>
@@ -32,9 +32,9 @@ export const ActionForm = ({
     [options]
   );
 
-
-  const { label: dynamicSectionLabel, component: dynamicForm } =
-   GetForm(nodeLabel, selectedType);
+  // Use the custom hook to get the appropriate form component
+  const { FormComponent: DynamicFormComponent, label: dynamicSectionLabel } =
+    useNodeForm(selectedType, nodeLabel);
 
   return (
     <div className="overflow-y-auto h-[calc(100%-72px)] flex flex-col">
@@ -58,7 +58,7 @@ export const ActionForm = ({
           </p>
         )}
       </div>
-      {selectedType === ActionType.SelectType.label ? null : (
+      {selectedType === Action.SelectType.label ? null : (
         <>
           {/* ==== Section 1: General Information ==== */}
           <Section
@@ -66,17 +66,23 @@ export const ActionForm = ({
             open={openSections.GeneralInformation}
             toggle={() => toggleSection("GeneralInformation")}
           >
-            <GeneralForm nodeLabel={nodeLabel} />
+            <GeneralForm 
+              nodeLabel={nodeLabel} 
+              selectedNode={selectedNode}
+              onUpdateNode={onUpdateNode}
+            />
           </Section>
 
           {/* ==== Section 2: Dynamic Settings Form ==== */}
-          <Section
-            title={dynamicSectionLabel}
-            open={openSections.DynamicSection}
-            toggle={() => toggleSection("DynamicSection")}
-          >
-            {dynamicForm && dynamicForm}
-          </Section>
+          {DynamicFormComponent && (
+            <Section
+              title={dynamicSectionLabel}
+              open={openSections.DynamicSection}
+              toggle={() => toggleSection("DynamicSection")}
+            >
+              <DynamicFormComponent nodeLabel={nodeLabel} />
+            </Section>
+          )}
         </>
       )}
     </div>

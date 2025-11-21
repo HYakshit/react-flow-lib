@@ -1,43 +1,32 @@
-import ApiCallForm from "../formData/Action/actionForms/ApiCallForm/ApiCallForm";
-import DatabaseUpdateForm from "../formData/Action/actionForms/DatabaseUpdate/DatabaseUpdateForm";
+import { useMemo } from "react";
+import { getFormFromRegistry } from "./formRegistry";
 
-function GetForm(nodeLabel , type) {
-  switch (type) {
-    case nodeLabel.APICall.label:
-      return {
-        label: nodeLabel.APICall.description,
-        component: <ApiCallForm />,
-      };
+/**
+ * Get form component and label based on type
+ * This function now uses the form registry pattern for better maintainability
+ * 
+ * @param {string|object} nodeLabel - Node label string or object for context
+ * @param {string} type - The selected form type (e.g., "API Call", "Database Update")
+ * @returns {object} Object with label and component
+ * 
+ * @deprecated Consider using useNodeForm hook instead for React components
+ * This function is kept for backward compatibility but will be phased out
+ */
+function GetForm(nodeLabel, type) {
+  const formConfig = getFormFromRegistry(type, nodeLabel);
+  
+  // Handle component instantiation
+  // If it's a React component (function), we need to create an element
+  // Otherwise, return null
+  const FormComponent = formConfig.component;
+  const component = FormComponent 
+    ? <FormComponent nodeLabel={nodeLabel} />
+    : null;
 
-    case nodeLabel.DatabaseUpdate.label:
-      return {
-        label: nodeLabel.DatabaseUpdate.description,
-        component: <DatabaseUpdateForm />,
-      };
-
-    case nodeLabel.SendEmail.label:
-      return {
-        label: nodeLabel.SendEmail.description,
-        // component: <SendEmailForm />,
-      };
-
-    case nodeLabel.Webhook.label:
-      return {
-        label: nodeLabel.Webhook.description,
-        // component: <WebhookForm />,
-      };
-
-    case nodeLabel.FileOperations.label:
-      return {
-        label: nodeLabel.FileOperations.description,
-        // component: <FileOperationsForm />,
-      };
-
-    default:
-      return {
-        label: "General Configuration",
-        component: <GeneralForm nodeLabel={nodeLabel} />,
-      };
-  }
+  return {
+    label: formConfig.label,
+    component: component,
+  };
 }
+
 export default GetForm;

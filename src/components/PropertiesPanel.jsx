@@ -94,8 +94,8 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
           <p className="text-xs text-gray-500">{selectedNode.type}</p>
         </div>
         <CategoryComponent
-          // subtype={selectedSubtype}
-          // nodeData={nodeData}
+          selectedNode={selectedNode}
+          onUpdateNode={onUpdateNode}
           nodeLabel={nodeLabel}
           options={options}
           selectedType={selectedType}

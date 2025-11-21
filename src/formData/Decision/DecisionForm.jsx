@@ -3,7 +3,7 @@ import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
 import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
 import Section from "../../utill/Section";
 
-export const DecisionForm = ({ options, selectedType, onTypeChange,nodeLabel, openSections,toggleSection }) => {
+export const DecisionForm = ({ options, selectedType, onTypeChange, nodeLabel, openSections, toggleSection, selectedNode, onUpdateNode }) => {
     const showTriggerSections = selectedType === "Time-based Trigger";
 
   return (
@@ -38,7 +38,11 @@ export const DecisionForm = ({ options, selectedType, onTypeChange,nodeLabel, op
         open={openSections.GeneralInformation}
         toggle={() => toggleSection("GeneralInformation")}
       >
-        <GeneralForm nodeLabel={nodeLabel} />
+        <GeneralForm 
+          nodeLabel={nodeLabel} 
+          selectedNode={selectedNode}
+          onUpdateNode={onUpdateNode}
+        />
       </Section>
       {showTriggerSections && (
         <>

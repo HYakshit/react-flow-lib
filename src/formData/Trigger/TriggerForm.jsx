@@ -1,12 +1,10 @@
 import { useMemo } from "react";
 import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
-import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
-import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
 import { TriggerType } from "../../lib/NodeConstants";
 import DropdownForm from "../Forms/DropdownForm/DropdownForm";
 import { triggerTypeIcons } from "../../lib/TypeIcons";
-import eventBasedTriggerOptions from "./constants/eventBasedTriggerOptions";
+import { useNodeForm } from "../../hooks/useNodeForm";
 
 export const TriggerForm = ({
   options,
@@ -15,11 +13,13 @@ export const TriggerForm = ({
   nodeLabel,
   openSections,
   toggleSection,
+  selectedNode,
+  onUpdateNode,
 }) => {
-  const showTriggerSections = selectedType === TriggerType.TimeBased;
-  const showEventBased = selectedType === TriggerType.EventBased;
-  const shConditional = selectedType === TriggerType.Conditional;
-  const shSystem = selectedType === TriggerType.System;
+  // Use the custom hook to get the appropriate form component based on selected trigger type
+  const { FormComponent: DynamicFormComponent, label: dynamicSectionLabel } =
+    useNodeForm(selectedType, nodeLabel);
+
   const dropdownOptions = useMemo(
     () =>
       options.map((opt) => {
@@ -68,43 +68,23 @@ export const TriggerForm = ({
             open={openSections.GeneralInformation}
             toggle={() => toggleSection("GeneralInformation")}
           >
-            <GeneralForm nodeLabel={nodeLabel} />
+            <GeneralForm 
+              nodeLabel={nodeLabel} 
+              selectedNode={selectedNode}
+              onUpdateNode={onUpdateNode}
+            />
           </Section>
-          {showTriggerSections && (
-            <>
-              <Section
-                title="Trigger Schedule"
-                open={openSections.TriggerSchedule}
-                toggle={() => toggleSection("TriggerSchedule")}
-              >
-                <TriggerScheduleForm />
-              </Section>
 
-              <Section
-                title="Retry Settings"
-                open={openSections.RetrySettings}
-                toggle={() => toggleSection("RetrySettings")}
-              >
-                <RetrySettingsForm />
-              </Section>
-            </>
+          {/* Dynamic trigger-specific form section */}
+          {DynamicFormComponent && (
+            <Section
+              title={dynamicSectionLabel}
+              open={openSections.DynamicSection}
+              toggle={() => toggleSection("DynamicSection")}
+            >
+              <DynamicFormComponent nodeLabel={nodeLabel} />
+            </Section>
           )}
-          {showEventBased && (
-            <>
-              <Section
-                title="Event Based Trigger"
-                open={openSections.EventBasedTrigger}
-                toggle={() => toggleSection("EventBasedTrigger")}
-              >
-                <DropdownForm
-                  label="Event Type"
-                  options={eventBasedTriggerOptions}
-                  value={selectedType}
-                  onChange={onTypeChange}
-                  fieldName="Event Type"
-                />
-              </Section>
-            </>)}
         </>)}
 
     </div>

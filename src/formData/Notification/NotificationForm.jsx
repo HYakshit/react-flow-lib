@@ -9,6 +9,8 @@ export const NotificationForm = ({
   nodeLabel,
   openSections,
   toggleSection,
+  selectedNode,
+  onUpdateNode,
 }) => {
   console.log("NotificationForm rendered",selectedType);
   const showTriggerSections = selectedType === "Time-based Trigger";
@@ -45,7 +47,11 @@ export const NotificationForm = ({
         open={openSections.GeneralInformation}
         toggle={() => toggleSection("GeneralInformation")}
       >
-        <GeneralForm nodeLabel={nodeLabel} />
+        <GeneralForm 
+          nodeLabel={nodeLabel} 
+          selectedNode={selectedNode}
+          onUpdateNode={onUpdateNode}
+        />
       </Section>
       {/* {showTriggerSections && (
         <>

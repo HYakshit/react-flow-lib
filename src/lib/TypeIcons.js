@@ -7,11 +7,11 @@ import {
   Database,
   Link2,
   FolderCog,
-  User ,
+  User,
   Sparkles,
   ServerCog,
 } from "lucide-react";
-import { ActionType, TriggerType } from "./NodeConstants";
+import { Action, TriggerType } from "./NodeConstants";
 
 export const triggerTypeIcons = {
   [TriggerType.SelectType]: Sparkles,
@@ -22,13 +22,13 @@ export const triggerTypeIcons = {
 };
 
 export const actionTypeIcons = {
-  [ActionType.SelectType.label]: Sparkles,
-  [ActionType.UserAction.label]: User,
-  [ActionType.APICall.label]: Globe,
-  [ActionType.DatabaseUpdate.label]: Database,
-  [ActionType.SendEmail.label]: Mail,
-  [ActionType.Webhook.label]: Link2,
-  [ActionType.FileOperations.label]: FolderCog,
+  [Action.SelectType.label]: Sparkles,
+  [Action.UserAction.label]: User,
+  [Action.APICall.label]: Globe,
+  [Action.DatabaseUpdate.label]: Database,
+  [Action.SendEmail.label]: Mail,
+  [Action.Webhook.label]: Link2,
+  [Action.FileOperations.label]: FolderCog,
 };
 
 
