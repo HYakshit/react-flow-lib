@@ -3,9 +3,9 @@ import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
 import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
 import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
-import { TriggerType } from "../../utill/NodeConstants";
+import { TriggerType } from "../../lib/NodeConstants";
 import DropdownForm from "../Forms/DropdownForm/DropdownForm";
-import { triggerTypeIcons } from "../../utill/TypeIcons";
+import { triggerTypeIcons } from "../../lib/TypeIcons";
 import eventBasedTriggerOptions from "./constants/eventBasedTriggerOptions";
 
 export const TriggerForm = ({

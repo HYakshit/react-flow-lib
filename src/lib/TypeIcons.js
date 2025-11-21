@@ -7,6 +7,7 @@ import {
   Database,
   Link2,
   FolderCog,
+  User ,
   Sparkles,
   ServerCog,
 } from "lucide-react";
@@ -21,12 +22,13 @@ export const triggerTypeIcons = {
 };
 
 export const actionTypeIcons = {
-  [ActionType.SelectType]: Sparkles,
-  [ActionType.APICall]: Globe,
-  [ActionType.DatabaseUpdate]: Database,
-  [ActionType.SendEmail]: Mail,
-  [ActionType.Webhook]: Link2,
-  [ActionType.FileOperations]: FolderCog,
+  [ActionType.SelectType.label]: Sparkles,
+  [ActionType.UserAction.label]: User,
+  [ActionType.APICall.label]: Globe,
+  [ActionType.DatabaseUpdate.label]: Database,
+  [ActionType.SendEmail.label]: Mail,
+  [ActionType.Webhook.label]: Link2,
+  [ActionType.FileOperations.label]: FolderCog,
 };
 
 

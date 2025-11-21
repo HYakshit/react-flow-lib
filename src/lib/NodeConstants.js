@@ -16,14 +16,43 @@ export const NodeType = Object.freeze(
   }, {})
 );
 
-export const ActionType = Object.freeze({
-  SelectType: "Select Type",
-  APICall: "API Call",
-  DatabaseUpdate: "Database Update",
-  SendEmail: "Send Email",
-  Webhook: "Webhook",
-  FileOperations: "File Operations",
-});
+export const Action = {
+  SelectType: {
+    label: "Select Type",
+    description: "Select a type for this action",
+  },
+
+  APICall: {
+    label: "API Call",
+    description: "API Call Settings",
+  },
+
+  UserAction: {
+    label: "User Action",
+    description: "User Action Settings",
+  },
+
+  DatabaseUpdate: {
+    label: "Database Update",
+    description: "Database Update Settings",
+  },
+
+  SendEmail: {
+    label: "Send Email",
+    description: "Email Settings",
+  },
+
+  Webhook: {
+    label: "Webhook",
+    description: "Webhook Settings",
+  },
+
+  FileOperations: {
+    label: "File Operations",
+    description: "File Operation Settings",
+  },
+};
+
 export const TriggerType = Object.freeze({
   SelectType: "Select Type",
   TimeBased: "Time-based Trigger",

@@ -3,9 +3,10 @@ import Section from "../../utill/Section";
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
 import ApiCallForm from "./actionForms/ApiCallForm/ApiCallForm";
 import DatabaseUpdateForm from "./actionForms/DatabaseUpdate/DatabaseUpdateForm";
-import { ActionType } from "../../utill/NodeConstants";
+import { ActionType } from "../../lib/NodeConstants";
 import DropdownForm from "../Forms/DropdownForm/DropdownForm";
-import { actionTypeIcons } from "../../utill/TypeIcons";
+import { actionTypeIcons } from "../../lib/TypeIcons";
+import GetForm from "../../utill/GetForm";
 
 export const ActionForm = ({
   options,
@@ -31,45 +32,9 @@ export const ActionForm = ({
     [options]
   );
 
-  function getFormComponent(type) {
-    switch (type) {
-      case ActionType.APICall:
-        return {
-          label: "API Call Settings",
-          component: <ApiCallForm />,
-        };
-
-      case ActionType.DatabaseUpdate:
-        return {
-          label: "Database Update Settings",
-          component: <DatabaseUpdateForm />,
-        };
-
-      case ActionType.SendEmail:
-        return {
-          label: "Email Settings",
-        };
-
-      case ActionType.Webhook:
-        return {
-          label: "Webhook Settings",
-        };
-
-      case ActionType.FileOperations:
-        return {
-          label: "File Operation Settings",
-        };
-
-      default:
-        return {
-          label: "General Configuration",
-          component: <GeneralForm nodeLabel={nodeLabel} />,
-        };
-    }
-  }
 
   const { label: dynamicSectionLabel, component: dynamicForm } =
-    getFormComponent(selectedType);
+   GetForm(nodeLabel, selectedType);
 
   return (
     <div className="overflow-y-auto h-[calc(100%-72px)] flex flex-col">
@@ -93,7 +58,7 @@ export const ActionForm = ({
           </p>
         )}
       </div>
-      {selectedType === ActionType.SelectType ? null : (
+      {selectedType === ActionType.SelectType.label ? null : (
         <>
           {/* ==== Section 1: General Information ==== */}
           <Section

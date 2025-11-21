@@ -1,6 +1,6 @@
 import { Handle } from "@xyflow/react";
 import { nodeIcons } from "../../utill/Icons";
-import { NODEDESCRIPTION } from "../../utill/NodeConstants";
+import { NODEDESCRIPTION } from "../../lib/NodeConstants";
 
 export const NodeCard = ({ data, onDragStart }) => {
   if (!data) return null; // prevent errors

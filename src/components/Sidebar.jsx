@@ -1,5 +1,5 @@
 
-import {  NODES } from "../utill/NodeConstants";
+import { NODES } from "../lib/NodeConstants"; 
 import { NodeCard } from "./common/NodeCard";
 
 const sidebarWidth = 250;

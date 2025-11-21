@@ -33,8 +33,7 @@ const DropdownWidget = ({
     };
   }, [open]);
 
-  const selectedOption =
-    optionMeta.find((opt) => opt.value === value) || null;
+  const selectedOption = optionMeta.find((opt) => opt.value === value) || null;
 
   const handleSelect = (nextValue) => {
     onChange(nextValue);
@@ -82,7 +81,9 @@ const DropdownWidget = ({
                 <button
                   type="button"
                   className={`flex w-full items-center justify-between px-4 py-3 text-sm transition hover:bg-indigo-50 ${
-                    isSelected ? "bg-indigo-100 text-indigo-600" : "text-gray-700"
+                    isSelected
+                      ? "bg-indigo-100 text-indigo-600"
+                      : "text-gray-700"
                   }`}
                   onClick={() => handleSelect(opt.value)}
                 >
@@ -202,4 +203,3 @@ const DropdownForm = ({
 };
 
 export default DropdownForm;
-

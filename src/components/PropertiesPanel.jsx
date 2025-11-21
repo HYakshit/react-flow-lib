@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import nodeTriggerTypes from "../formData/nodeTriggerTypes";
+import nodeTriggerTypes from "../lib/nodeTriggerTypes";
 import TriggerForm from "../formData/Trigger/TriggerForm";
 import ActionForm from "../formData/Action/ActionForm";
 import Section from "../utill/Section";
@@ -10,7 +10,7 @@ import DecisionForm from "../formData/Decision/DecisionForm";
 import LoopForm from "../formData/Loop/LoopForm";
 import ParallelForm from "../formData/Parallel/ParallelForm";
 import SubProcessForm from "../formData/SubProcessForm/SubProcessForm";
-import { NodeType } from "../utill/NodeConstants";
+import { NodeType } from "../lib/NodeConstants"; 
 export default function PropertiesPanel({ selectedNode, onUpdateNode }) {
   const options = nodeTriggerTypes[selectedNode?.type] || [];
   const [selectedType, setSelectedType] = useState(

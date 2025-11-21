@@ -1,20 +1,22 @@
 import {
   NodeType,
-  ActionType,
+  Action,
   TriggerType,
   DelayType,
   ConditionalType,
   DecisionType,
   NotificationType,
-} from "../utill/NodeConstants";
+} from "./NodeConstants";
+
 const nodeTriggerTypes = {
   [NodeType.Action]: [
-    ActionType.SelectType,
-    ActionType.APICall,
-    ActionType.DatabaseUpdate,
-    ActionType.SendEmail,
-    ActionType.Webhook,
-    ActionType.FileOperations,
+    Action.SelectType.label,
+    Action.APICall.label,
+    Action.DatabaseUpdate.label,
+    Action.UserAction.label,
+    Action.SendEmail.label,
+    Action.Webhook.label,
+    Action.FileOperations.label,
   ],
 
   [NodeType.Trigger]: [

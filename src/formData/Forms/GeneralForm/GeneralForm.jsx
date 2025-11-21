@@ -3,7 +3,7 @@ import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import GeneralSchema from "./GeneralSchema";
 import GeneralUiSchema from "./GeneralUiSchema";
-import { NODEDESCRIPTION } from "../../../utill/NodeConstants";
+import { NODEDESCRIPTION } from "../../../lib/NodeConstants";
 
 const GeneralForm = ({ nodeLabel }) => {
   const log = (type) => console.log.bind(console, type);
