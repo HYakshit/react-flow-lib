@@ -10,15 +10,17 @@ import {
   User,
   Sparkles,
   ServerCog,
+  FormInput
 } from "lucide-react";
 import { Action, TriggerType } from "./NodeConstants";
 
 export const triggerTypeIcons = {
-  [TriggerType.SelectType]: Sparkles,
-  [TriggerType.TimeBased]: Clock8,
-  [TriggerType.EventBased]: CalendarClock,
-  [TriggerType.Conditional]: Filter,
-  [TriggerType.System]: ServerCog,
+  [TriggerType.SelectType.label]: Sparkles,
+  [TriggerType.formAction.label]: FormInput ,
+  [TriggerType.TimeBased.label]: Clock8,
+  [TriggerType.EventBased.label]: CalendarClock,
+  [TriggerType.Conditional.label]: Filter,
+  [TriggerType.System.label]: ServerCog,
 };
 
 export const actionTypeIcons = {

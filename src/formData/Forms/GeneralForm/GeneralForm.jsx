@@ -5,6 +5,7 @@ import validator from "@rjsf/validator-ajv8";
 import GeneralSchema from "./GeneralSchema";
 import GeneralUiSchema from "./GeneralUiSchema";
 import { NODEDESCRIPTION } from "../../../lib/NodeConstants";
+import formWidgets from "../widgets";
 
 const GeneralForm = ({ nodeLabel, selectedNode, onUpdateNode }) => {
   // Initialize formData from node data if available, otherwise use defaults
@@ -47,6 +48,7 @@ const GeneralForm = ({ nodeLabel, selectedNode, onUpdateNode }) => {
         uiSchema={GeneralUiSchema}
         formData={initialFormData}
         validator={validator}
+        widgets={formWidgets}
         onChange={handleChange}
         onSubmit={log("submitted")}
         onError={log("errors")}

@@ -53,31 +53,84 @@ export const Action = {
   },
 };
 
-export const TriggerType = Object.freeze({
-  SelectType: "Select Type",
-  TimeBased: "Time-based Trigger",
-  EventBased: "Event-based Trigger",
-  Conditional: "Conditional Trigger",
-  System: "System Trigger",
-});
-export const DelayType = Object.freeze({
-  WaitDuration: "Wait for Duration",
-  WaitUntil: "Wait until Date/Time",
-  PauseUntil: "Pause until Condition",
-});
-export const ConditionalType = Object.freeze({
-  IfMet: "If Condition Met",
-  IfNotMet: "If Not Met",
-});
-export const DecisionType = Object.freeze({
-  SwitchRoute: "Switch/Route Based on Value",
-  MultiBranch: "Multi-Branch Decision",
-});
-export const NotificationType = Object.freeze({
-  Email: "Send Email Notification",
-  Push: "Send Push Notification",
-  SMS: "Send SMS Notification",
-});
+export const TriggerType = {
+  SelectType: {
+    label: "Select Type",
+    description: "Select a trigger type",
+  },
+  formAction: {
+    label: "Form Action",
+    description: "Create Form Trigger",
+  },
+  TimeBased: {
+    label: "Time-based Trigger",
+    description: "Trigger based on specific time or schedule",
+  },
+  EventBased: {
+    label: "Event-based Trigger",
+    description: "Trigger when an event occurs",
+  },
+  Conditional: {
+    label: "Conditional Trigger",
+    description: "Trigger when a condition becomes true",
+  },
+  System: {
+    label: "System Trigger",
+    description: "Trigger based on system-level events",
+  },
+};
+
+export const DelayType = {
+  WaitDuration: {
+    label: "Wait for Duration",
+    description: "Pause workflow for a given duration",
+  },
+  WaitUntil: {
+    label: "Wait until Date/Time",
+    description: "Wait until a specific date or time",
+  },
+  PauseUntil: {
+    label: "Pause until Condition",
+    description: "Pause workflow until a condition is met",
+  },
+};
+
+export const ConditionalType = {
+  IfMet: {
+    label: "If Condition Met",
+    description: "Run this branch if the condition is met",
+  },
+  IfNotMet: {
+    label: "If Not Met",
+    description: "Run this branch if the condition is not met",
+  },
+};
+
+export const DecisionType = {
+  SwitchRoute: {
+    label: "Switch/Route Based on Value",
+    description: "Route workflow based on a selected value",
+  },
+  MultiBranch: {
+    label: "Multi-Branch Decision",
+    description: "Create multiple branches based on conditions",
+  },
+};
+
+export const NotificationType = {
+  Email: {
+    label: "Send Email Notification",
+    description: "Email notification settings",
+  },
+  Push: {
+    label: "Send Push Notification",
+    description: "Push notification settings",
+  },
+  SMS: {
+    label: "Send SMS Notification",
+    description: "SMS notification settings",
+  },
+};
 
 export const NODEDESCRIPTION = {
   Trigger: "Start event",

@@ -1,31 +1,15 @@
- const DatabaseUpdateUiSchema = {
-  "dataSource": {
-    "ui:widget": "select"
-  },
-  "objectType": {
-    "ui:widget": "select"
-  },
-  "recordId": {
-    "ui:placeholder": "e.g. {{order.id}}"
-  },
-  "fieldsToUpdate": {
+const DatabaseUpdateUiSchema = {
+  fieldsToUpdate: {
     "ui:widget": "textarea",
-    "ui:placeholder": "Type your fields here"
+    "ui:placeholder": "Type your fields here",
   },
-  "conditionsForUpdate": {
+  conditionsForUpdate: {
     "ui:widget": "textarea",
-    "ui:placeholder": "Type your conditions here"
+    "ui:placeholder": "Type your conditions here",
   },
-  "includeUpdatedData": {
-    "ui:widget": "checkbox"
+  includeUpdatedData: {
+    "ui:widget": "checkbox",
   },
-  "ui:order": [
-    "dataSource",
-    "objectType",
-    "recordId",
-    "fieldsToUpdate",
-    "conditionsForUpdate",
-    "includeUpdatedData"
-  ]
-}
+};
+
 export default DatabaseUpdateUiSchema;

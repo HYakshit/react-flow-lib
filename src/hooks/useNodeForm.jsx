@@ -24,7 +24,7 @@ export const useNodeForm = (selectedType, nodeLabel = null) => {
     }
 
     const config = getFormFromRegistry(selectedType, nodeLabel);
-    
+    console.log("useNodeForm - Resolved form config:", { selectedType, nodeLabel, config });
     return {
       FormComponent: config.component,
       label: config.label,

@@ -20,11 +20,12 @@ const nodeTriggerTypes = {
   ],
 
   [NodeType.Trigger]: [
-    TriggerType.SelectType,
-    TriggerType.TimeBased,
-    TriggerType.EventBased,
-    TriggerType.Conditional,
-    TriggerType.System,
+    TriggerType.SelectType.label,
+    TriggerType.formAction.label,
+    TriggerType.TimeBased.label,
+    TriggerType.EventBased.label,
+    TriggerType.Conditional.label,
+    TriggerType.System.label,
   ],
 
   [NodeType.Delay]: [

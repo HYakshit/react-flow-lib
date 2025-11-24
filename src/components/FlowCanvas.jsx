@@ -30,6 +30,7 @@ const nodeTypes = {
 
 function FlowCanvas({ onNodeSelect }) {
   const initialNodes = [];
+  const [project, setProjectName] = useState({name: "Default Flow",path: "  Workplacee"});
   const initialEdges = [{ markerEnd: { type: MarkerType.ArrowClosed } }];
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -44,6 +45,9 @@ function FlowCanvas({ onNodeSelect }) {
   const historyIndexRef = useRef(0);
   const isUndoRedoRef = useRef(false);
 
+  const handleProjectName = (name) => {
+    setProjectName({ ...project, [name]: name });
+  }
   // Update undo/redo availability
   const updateUndoRedoState = useCallback(() => {
     setCanUndo(historyIndexRef.current > 0);
@@ -245,6 +249,8 @@ function FlowCanvas({ onNodeSelect }) {
         <Panel position="top-center">
           {" "}
           <Navbar
+          project={project}
+          setProjectName={handleProjectName}
             onUndo={undo}
             onRedo={redo}
             onReset={reset}

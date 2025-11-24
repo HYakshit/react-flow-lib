@@ -16,6 +16,11 @@ export const TriggerForm = ({
   selectedNode,
   onUpdateNode,
 }) => {
+  console.log("TriggerForm Rendered with:", {
+    options,
+    selectedType,
+    nodeLabel,
+  });
   // Use the custom hook to get the appropriate form component based on selected trigger type
   const { FormComponent: DynamicFormComponent, label: dynamicSectionLabel } =
     useNodeForm(selectedType, nodeLabel);
@@ -61,7 +66,7 @@ export const TriggerForm = ({
           )}
         </div>
       </div>
-      {selectedType === TriggerType.SelectType ? null : (
+      {selectedType === TriggerType.SelectType.label ? null : (
         <>
           <Section
             title="General Information"

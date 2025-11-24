@@ -8,13 +8,13 @@ import {
   Folder,
   ArrowLeft,
   ArrowRight,
-  Settings,
   Sun,
   Moon,
   Edit3,
 } from "lucide-react";
 
-export const Navbar = ({ onUndo, onRedo, onReset, canUndo, canRedo }) => {
+export const Navbar = ({ onUndo, project, onRedo, onReset, canUndo, canRedo }) => {
+  console.log("Project in Navbar:", project);
   return (
     <div className="w-full px-4 py-2 bg-white rounded-2xl shadow flex items-center justify-between">
       {/* LEFT SIDE — Logo + Icons */}
@@ -33,9 +33,9 @@ export const Navbar = ({ onUndo, onRedo, onReset, canUndo, canRedo }) => {
 
       {/* CENTER — Folder Path */}
       <div className="hidden md:flex items-center gap-1 text-gray-700">
-        <span className="font-medium">Folder Name</span>
+        <span className="font-medium">{project?.name }</span>
         <span>/</span>
-        <span className="font-semibold">Untitled</span>
+        <span className="font-semibold">{project?.path}</span>
         <span className="cursor-pointer">▼</span>
       </div>
 

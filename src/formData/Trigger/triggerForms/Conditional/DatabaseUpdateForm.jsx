@@ -3,6 +3,7 @@ import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import DatabaseUpdateUiSchema from "./DatabaseUpdateUiSchema";
 import DatabaseUpdateSchema from "./DatabaseUpdateSchema";
+import formWidgets from "../../../Forms/widgets";
 
 const DatabaseUpdateForm = ({ nodeLabel }) => {
   const log = (type) => console.log.bind(console, type);
@@ -11,9 +12,9 @@ const DatabaseUpdateForm = ({ nodeLabel }) => {
     <div style={{ maxWidth: 500, margin: "0 auto" }}>
       <Form
         schema={DatabaseUpdateSchema}
-        uiSchema={ DatabaseUpdateUiSchema }
-      
+        uiSchema={DatabaseUpdateUiSchema}
         validator={validator}
+        widgets={formWidgets}
         onChange={log("changed")}
         onSubmit={log("submitted")}
         onError={log("errors")}

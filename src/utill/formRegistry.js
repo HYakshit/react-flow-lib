@@ -9,6 +9,7 @@ import EventBasedForm from "../formData/Trigger/triggerForms/Event-based/EventBa
 import ConditionalTriggerForm from "../formData/Trigger/triggerForms/Conditional/DatabaseUpdateForm";
 import TimeBasedTriggerForm from "../formData/Trigger/triggerForms/TimeBased/TimeBasedTriggerForm";
 import { Action, TriggerType } from "../lib/NodeConstants";
+import FormTrigger from "../formData/Trigger/triggerForms/FormTrigger/FormTrigger";
 
 // Form registry configuration
 // Each entry maps a form type identifier to its component and metadata
@@ -39,25 +40,31 @@ const FORM_REGISTRY = {
     label: Action.FileOperations.description,
     category: "Action",
   },
+
   // Trigger Forms
-  [TriggerType.TimeBased]: {
+  [TriggerType.TimeBased.label]: {
     component: TimeBasedTriggerForm,
-    label: "Time-based Trigger Settings",
+    label: TriggerType.TimeBased.description,
     category: "Trigger",
   },
-  [TriggerType.EventBased]: {
+  [TriggerType.EventBased.label]: {
     component: EventBasedForm,
-    label: "Event Based Trigger Settings",
+    label: TriggerType.EventBased.description,
     category: "Trigger",
   },
-  [TriggerType.Conditional]: {
+  [TriggerType.formAction.label]: {
+    component: FormTrigger,
+    label: TriggerType.formAction.description,
+    category: "Trigger",
+  },
+  [TriggerType.Conditional.label]: {
     component: ConditionalTriggerForm,
-    label: "Conditional Trigger Settings",
+    label: TriggerType.Conditional.description,
     category: "Trigger",
   },
-  [TriggerType.System]: {
+  [TriggerType.System.label]: {
     component: null, // Component not yet implemented
-    label: "System Trigger Settings",
+    label: TriggerType.System.description,
     category: "Trigger",
   },
   // Default fallback form
@@ -97,7 +104,12 @@ export const getFormFromRegistry = (formType, nodeLabel = null) => {
  * @param {string} label - The form label/description
  * @param {string} category - The form category (optional)
  */
-export const registerForm = (formType, component, label, category = "General") => {
+export const registerForm = (
+  formType,
+  component,
+  label,
+  category = "General"
+) => {
   FORM_REGISTRY[formType] = {
     component,
     label,
@@ -106,4 +118,3 @@ export const registerForm = (formType, component, label, category = "General") =
 };
 
 export default FORM_REGISTRY;
-
