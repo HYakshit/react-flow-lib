@@ -29,20 +29,26 @@ const nodeTriggerTypes = {
   ],
 
   [NodeType.Delay]: [
-    "Select Type",
-    DelayType.WaitDuration,
-    DelayType.WaitUntil,
-    DelayType.PauseUntil,
+    // DelayType.SelectType.label,
+    DelayType.WaitDuration.label,
+    DelayType.WaitUntil.label,
+    DelayType.PauseUntil.label,
   ],
 
-  [NodeType.Conditional]: [ConditionalType.IfMet, ConditionalType.IfNotMet],
+  [NodeType.Conditional]: [
+    ConditionalType.IfMet.label,
+    ConditionalType.IfNotMet.label,
+  ],
 
-  [NodeType.Decision]: [DecisionType.SwitchRoute, DecisionType.MultiBranch],
+  [NodeType.Decision]: [
+    DecisionType.SwitchRoute.label,
+    DecisionType.MultiBranch.label,
+  ],
 
   [NodeType.Notification]: [
-    NotificationType.Email,
-    NotificationType.Push,
-    NotificationType.SMS,
+    NotificationType.Email.label,
+    NotificationType.Push.label,
+    NotificationType.SMS.label,
   ],
 };
 
