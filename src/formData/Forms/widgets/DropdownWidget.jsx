@@ -28,9 +28,15 @@ const DropdownWidget = ({
   options = {},
   rawErrors = [],
 }) => {
-  const optionMeta = normalizeOptions(options.optionMeta ?? [], options.enumOptions);
+  const optionMeta = normalizeOptions(
+    options.optionMeta ?? [],
+    options.enumOptions
+  );
   const resolvedPlaceholder =
-    placeholder ?? options.placeholder ?? options["ui:placeholder"] ?? "Select an option";
+    placeholder ??
+    options.placeholder ??
+    options["ui:placeholder"] ??
+    "Select an option";
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -77,7 +83,9 @@ const DropdownWidget = ({
         >
           <span className="flex items-center gap-2 truncate">
             {selectedOption?.icon && (
-              <span className="inline-flex items-center justify-center">{selectedOption.icon}</span>
+              <span className="inline-flex items-center justify-center">
+                {selectedOption.icon}
+              </span>
             )}
             <span className="truncate">
               {selectedOption?.label || resolvedPlaceholder}
@@ -100,13 +108,17 @@ const DropdownWidget = ({
                   <button
                     type="button"
                     className={`flex w-full items-center justify-between px-4 py-3 text-sm transition hover:bg-indigo-50 ${
-                      isSelected ? "bg-indigo-100 text-indigo-600" : "text-gray-700"
+                      isSelected
+                        ? "bg-indigo-100 text-indigo-600"
+                        : "text-gray-700"
                     }`}
                     onClick={() => handleSelect(opt.value)}
                   >
                     <span className="flex items-center gap-3">
                       {opt.icon && (
-                        <span className="inline-flex items-center justify-center">{opt.icon}</span>
+                        <span className="inline-flex items-center justify-center">
+                          {opt.icon}
+                        </span>
                       )}
                       <span className="font-medium">{opt.label}</span>
                     </span>
@@ -130,5 +142,3 @@ const DropdownWidget = ({
 };
 
 export default DropdownWidget;
-
-

@@ -30,7 +30,7 @@ const nodeTypes = {
 
 function FlowCanvas({ onNodeSelect }) {
   const initialNodes = [];
-  const [project, setProjectName] = useState({name: "Default Flow",path: "  Workplacee"});
+  const [project, setProjectName] = useState({name: "Default Flow",path: "  Workplace"});
   const initialEdges = [{ markerEnd: { type: MarkerType.ArrowClosed } }];
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);

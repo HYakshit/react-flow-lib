@@ -4,11 +4,22 @@
 
 import ApiCallForm from "../formData/Action/actionForms/ApiCallForm/ApiCallForm";
 import DatabaseUpdateForm from "../formData/Action/actionForms/DatabaseUpdate/DatabaseUpdateForm";
+import CreateRecordForm from "../formData/Action/actionForms/CreateRecord/CreateRecordForm";
+import SendEmailForm from "../formData/Action/actionForms/SendEmail/SendEmailForm";
+import FixedDelayForm from "../formData/Delay/delayForms/FixedDelay/FixedDelayForm";
+import DynamicDelayForm from "../formData/Delay/delayForms/DynamicDelay/DynamicDelayForm";
+import ConditionalDelayForm from "../formData/Delay/delayForms/ConditionalDelay/ConditionalDelayForm";
+import UntilSpecificDateForm from "../formData/Delay/delayForms/UntilSpecificDate/UntilSpecificDateForm";
 import GeneralForm from "../formData/Forms/GeneralForm/GeneralForm";
 import EventBasedForm from "../formData/Trigger/triggerForms/Event-based/EventBasedForm";
 import ConditionalTriggerForm from "../formData/Trigger/triggerForms/Conditional/DatabaseUpdateForm";
 import TimeBasedTriggerForm from "../formData/Trigger/triggerForms/TimeBased/TimeBasedTriggerForm";
-import { Action, TriggerType } from "../lib/NodeConstants";
+import {
+  Action,
+  DelayType,
+  NotificationType,
+  TriggerType,
+} from "../lib/NodeConstants";
 import FormTrigger from "../formData/Trigger/triggerForms/FormTrigger/FormTrigger";
 
 // Form registry configuration
@@ -20,13 +31,13 @@ const FORM_REGISTRY = {
     label: Action.APICall.description,
     category: "Action",
   },
-  [Action.DatabaseUpdate.label]: {
+  [Action.UpdateRecord.label]: {
     component: DatabaseUpdateForm,
-    label: Action.DatabaseUpdate.description,
+    label: Action.UpdateRecord.description,
     category: "Action",
   },
   [Action.SendEmail.label]: {
-    component: null, // Component not yet implemented
+    component: SendEmailForm,
     label: Action.SendEmail.description,
     category: "Action",
   },
@@ -35,10 +46,37 @@ const FORM_REGISTRY = {
     label: Action.Webhook.description,
     category: "Action",
   },
-  [Action.FileOperations.label]: {
-    component: null, // Component not yet implemented
-    label: Action.FileOperations.description,
+  [Action.CreateRecord.label]: {
+    component: CreateRecordForm,
+    label: Action.CreateRecord.description,
     category: "Action",
+  },
+
+  // Delay Forms
+  [DelayType.SelectType.label]: {
+    component: null,
+    label: DelayType.SelectType.description,
+    category: "Delay",
+  },
+  [DelayType.Fixed.label]: {
+    component: FixedDelayForm,
+    label: DelayType.Fixed.description,
+    category: "Delay",
+  },
+  [DelayType.Dynamic.label]: {
+    component: DynamicDelayForm,
+    label: DelayType.Dynamic.description,
+    category: "Delay",
+  },
+  [DelayType.Conditional.label]: {
+    component: ConditionalDelayForm,
+    label: DelayType.Conditional.description,
+    category: "Delay",
+  },
+  [DelayType.UntilSpecificDate.label]: {
+    component: UntilSpecificDateForm,
+    label: DelayType.UntilSpecificDate.description,
+    category: "Delay",
   },
 
   // Trigger Forms
@@ -67,6 +105,31 @@ const FORM_REGISTRY = {
     label: TriggerType.System.description,
     category: "Trigger",
   },
+
+  // notification Forms
+  [NotificationType.Email.label]: {
+    component: SendEmailForm, // Component not yet implemented
+    label: NotificationType.Email.description,
+    category: "Notification",
+  },
+  [NotificationType.Push.label]: {
+    component: null, // Component not yet implemented
+    label: NotificationType.Push.description,
+    category: "Notification",
+  },
+
+  [NotificationType.SMS.label]: {
+    component: null, // Component not yet implemented
+    label: NotificationType.SMS.description,
+    category: "Notification",
+  },
+
+  [NotificationType.Call.label]: {
+    component: null, // Component not yet implemented
+    label: NotificationType.Call.description,
+    category: "Notification",
+  },
+
   // Default fallback form
   default: {
     component: GeneralForm,
@@ -86,12 +149,12 @@ export const getFormFromRegistry = (formType, nodeLabel = null) => {
   const formConfig = FORM_REGISTRY[formType] || FORM_REGISTRY.default;
 
   // If no component is available, fall back to default
-  if (!formConfig.component) {
-    return {
-      ...FORM_REGISTRY.default,
-      label: formConfig.label || FORM_REGISTRY.default.label,
-    };
-  }
+  // if (!formConfig.component) {
+  //   return {
+  //     ...FORM_REGISTRY.default,
+  //     label: formConfig.label || FORM_REGISTRY.default.label,
+  //   };
+  // }
 
   return formConfig;
 };

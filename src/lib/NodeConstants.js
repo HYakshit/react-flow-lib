@@ -32,9 +32,9 @@ export const Action = {
     description: "User Action Settings",
   },
 
-  DatabaseUpdate: {
-    label: "Database Update",
-    description: "Database Update Settings",
+  UpdateRecord: {
+    label: "Update Record",
+    description: "Update Record Settings",
   },
 
   SendEmail: {
@@ -47,9 +47,9 @@ export const Action = {
     description: "Webhook Settings",
   },
 
-  FileOperations: {
-    label: "File Operations",
-    description: "File Operation Settings",
+  CreateRecord: {
+    label: "Create Record",
+    description: "Create Record Settings",
   },
 };
 
@@ -81,17 +81,25 @@ export const TriggerType = {
 };
 
 export const DelayType = {
-  WaitDuration: {
-    label: "Wait for Duration",
-    description: "Pause workflow for a given duration",
+  SelectType: {
+    label: "Select Delay Type",
+    description: "Choose how long to pause this workflow",
   },
-  WaitUntil: {
-    label: "Wait until Date/Time",
-    description: "Wait until a specific date or time",
+  Fixed: {
+    label: "Fixed Delay",
+    description: "Pause for a fixed amount of time",
   },
-  PauseUntil: {
-    label: "Pause until Condition",
-    description: "Pause workflow until a condition is met",
+  Dynamic: {
+    label: "Dynamic Delay",
+    description: "Calculate the delay from data or expressions",
+  },
+  Conditional: {
+    label: "Conditional Delay",
+    description: "Wait until a condition evaluates to true",
+  },
+  UntilSpecificDate: {
+    label: "Until Specific Date/Time",
+    description: "Resume the workflow at a scheduled moment",
   },
 };
 
@@ -118,6 +126,10 @@ export const DecisionType = {
 };
 
 export const NotificationType = {
+  SelectType: {
+    label: "Select Type",
+    description: "Select a type for this action",
+  },
   Email: {
     label: "Send Email Notification",
     description: "Email notification settings",
@@ -129,6 +141,10 @@ export const NotificationType = {
   SMS: {
     label: "Send SMS Notification",
     description: "SMS notification settings",
+  },
+  Call: {
+    label: "Call Notification",
+    description: "Call notification settings",
   },
 };
 

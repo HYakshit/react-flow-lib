@@ -10,13 +10,20 @@ import {
   User,
   Sparkles,
   ServerCog,
-  FormInput
+  FormInput,
+  Menu,
+  Bell,
+  MessageSquare,
+  Phone,
+  Hourglass,
+  PauseCircle,
+  Layers2,
 } from "lucide-react";
-import { Action, TriggerType } from "./NodeConstants";
+import { Action, DelayType, NotificationType, TriggerType } from "./NodeConstants";
 
 export const triggerTypeIcons = {
-  [TriggerType.SelectType.label]: Sparkles,
-  [TriggerType.formAction.label]: FormInput ,
+  [TriggerType.SelectType.label]: Menu,
+  [TriggerType.formAction.label]: FormInput,
   [TriggerType.TimeBased.label]: Clock8,
   [TriggerType.EventBased.label]: CalendarClock,
   [TriggerType.Conditional.label]: Filter,
@@ -24,13 +31,25 @@ export const triggerTypeIcons = {
 };
 
 export const actionTypeIcons = {
-  [Action.SelectType.label]: Sparkles,
+  [Action.SelectType.label]: Menu,
   [Action.UserAction.label]: User,
   [Action.APICall.label]: Globe,
-  [Action.DatabaseUpdate.label]: Database,
+  [Action.UpdateRecord.label]: Database,
   [Action.SendEmail.label]: Mail,
   [Action.Webhook.label]: Link2,
-  [Action.FileOperations.label]: FolderCog,
+  [Action.CreateRecord.label]: FolderCog,
 };
-
-
+export const NotificationTypeIcons = {
+  [NotificationType.SelectType.label]: Menu,
+  [NotificationType.Email.label]: Mail,
+  [NotificationType.Push.label]: Bell,
+  [NotificationType.SMS.label]: MessageSquare,
+  [NotificationType.Call.label]: Phone,
+};
+export const DelayTypeIcons = {
+  [DelayType.SelectType.label]: Menu,
+  [DelayType.Fixed.label]: Clock8,
+  [DelayType.Dynamic.label]: Hourglass,
+  [DelayType.Conditional.label]: Layers2,
+  [DelayType.UntilSpecificDate.label]: CalendarClock,
+};

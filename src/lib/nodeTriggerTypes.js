@@ -12,11 +12,11 @@ const nodeTriggerTypes = {
   [NodeType.Action]: [
     Action.SelectType.label,
     Action.APICall.label,
-    Action.DatabaseUpdate.label,
+    Action.UpdateRecord.label,
     Action.UserAction.label,
     Action.SendEmail.label,
-    Action.Webhook.label,
-    Action.FileOperations.label,
+    // Action.Webhook.label,
+    Action.CreateRecord.label,
   ],
 
   [NodeType.Trigger]: [
@@ -29,10 +29,11 @@ const nodeTriggerTypes = {
   ],
 
   [NodeType.Delay]: [
-    // DelayType.SelectType.label,
-    DelayType.WaitDuration.label,
-    DelayType.WaitUntil.label,
-    DelayType.PauseUntil.label,
+    DelayType.SelectType.label,
+    DelayType.Fixed.label,
+    DelayType.Dynamic.label,
+    DelayType.Conditional.label,
+    DelayType.UntilSpecificDate.label,
   ],
 
   [NodeType.Conditional]: [
@@ -46,9 +47,11 @@ const nodeTriggerTypes = {
   ],
 
   [NodeType.Notification]: [
+    NotificationType.SelectType.label,
     NotificationType.Email.label,
     NotificationType.Push.label,
     NotificationType.SMS.label,
+    NotificationType.Call.label,
   ],
 };
 
