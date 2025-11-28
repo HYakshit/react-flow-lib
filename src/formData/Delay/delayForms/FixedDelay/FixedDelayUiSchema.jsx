@@ -10,4 +10,3 @@ const FixedDelayUiSchema = {
 };
 
 export default FixedDelayUiSchema;
-

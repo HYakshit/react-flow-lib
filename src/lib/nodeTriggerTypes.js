@@ -37,8 +37,8 @@ const nodeTriggerTypes = {
   ],
 
   [NodeType.Conditional]: [
-    ConditionalType.IfMet.label,
-    ConditionalType.IfNotMet.label,
+    ConditionalType.Conditional.label,
+    // ConditionalType.IfNotMet.label,
   ],
 
   [NodeType.Decision]: [

@@ -104,13 +104,9 @@ export const DelayType = {
 };
 
 export const ConditionalType = {
-  IfMet: {
+  Conditional: {
     label: "If Condition Met",
     description: "Run this branch if the condition is met",
-  },
-  IfNotMet: {
-    label: "If Not Met",
-    description: "Run this branch if the condition is not met",
   },
 };
 

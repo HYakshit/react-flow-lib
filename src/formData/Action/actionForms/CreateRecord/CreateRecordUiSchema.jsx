@@ -14,4 +14,3 @@ const CreateRecordUiSchema = {
 };
 
 export default CreateRecordUiSchema;
-

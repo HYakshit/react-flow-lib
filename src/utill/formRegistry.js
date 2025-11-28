@@ -14,8 +14,10 @@ import GeneralForm from "../formData/Forms/GeneralForm/GeneralForm";
 import EventBasedForm from "../formData/Trigger/triggerForms/Event-based/EventBasedForm";
 import ConditionalTriggerForm from "../formData/Trigger/triggerForms/Conditional/DatabaseUpdateForm";
 import TimeBasedTriggerForm from "../formData/Trigger/triggerForms/TimeBased/TimeBasedTriggerForm";
+import ConditionalForm from "../formData/Conditional/ConditionalForm";
 import {
   Action,
+  ConditionalType,
   DelayType,
   NotificationType,
   TriggerType,
@@ -128,6 +130,13 @@ const FORM_REGISTRY = {
     component: null, // Component not yet implemented
     label: NotificationType.Call.description,
     category: "Notification",
+  },
+
+  // conditional Forms
+  [ConditionalType.Conditional.label]: {
+    component: ConditionalForm,
+    label: "Conditional Form",
+    category: "Conditional",
   },
 
   // Default fallback form

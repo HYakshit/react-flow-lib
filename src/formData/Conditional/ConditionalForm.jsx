@@ -1,10 +1,8 @@
 import GeneralForm from "../Forms/GeneralForm/GeneralForm";
-import RetrySettingsForm from "../Forms/RetrySettingsForm/RetrySettingsForm";
-import TriggerScheduleForm from "../Forms/TriggerScheduleForm/TriggerScheduleForm";
+import RulesForm from "../Forms/ConditionalForm/RulesForm";
 import Section from "../../utill/Section";
 
 export const ConditionalForm = ({ options, selectedType, onTypeChange, nodeLabel, openSections, toggleSection, selectedNode, onUpdateNode }) => {
-    const showTriggerSections = selectedType === "Time-based Trigger";
 
   return (
     <div className="  overflow-y-auto h-[calc(100%-72px)] flex flex-col">
@@ -44,25 +42,16 @@ export const ConditionalForm = ({ options, selectedType, onTypeChange, nodeLabel
           onUpdateNode={onUpdateNode}
         />
       </Section>
-      {showTriggerSections && (
-        <>
-          <Section
-            title="Trigger Schedule"
-            open={openSections.TriggerSchedule}
-            toggle={() => toggleSection("TriggerSchedule")}
-          >
-            <TriggerScheduleForm />
-          </Section>
-
-          <Section
-            title="Retry Settings"
-            open={openSections.RetrySettings}
-            toggle={() => toggleSection("RetrySettings")}
-          >
-            <RetrySettingsForm />
-          </Section>
-        </>
-      )}
+      <Section
+        title="Rules"
+        open={openSections.DynamicSection}
+        toggle={() => toggleSection("DynamicSection")}
+      >
+        <RulesForm
+          selectedNode={selectedNode}
+          onUpdateNode={onUpdateNode}
+        />
+      </Section>
     </div>
   );
 };
